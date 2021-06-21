@@ -213,16 +213,16 @@ str1:string;
   }
       console.log("registerFormmm: ",registerForm.value)
       this.profilService.registerProfil(registerForm.value, this.localUser.data.token).subscribe(data => {
-        this.detaRegester=data;
-        this.str1=this.detaRegester.statut;
-         this.index = this.str1.localeCompare( "SUCCESS");  
-         this.getAllProfil();
+        
+        this.getAllProfil();
+        this.getAllProfil();
 
         
   
       }, 
       error => console.log(error));
-    this.getAllProfil();
+      this.getAllProfil();
+      this.getAllProfil();
 
     }
 
@@ -265,20 +265,15 @@ str1:string;
       this.updateeProfil=profil;
 
      this.profi=this.societeChoisie
-     for (let order of this.profi) {
-
-      if (profil.id === order.id) {
-          this.profi.splice(this.profi.indexOf(order), 1);
-          break;
-      }
-     }
+     
 
      this.getAllProfil();
     
     }
 
     modifierFoorm:any;
-    modifierTypeEntite(modifierForm){
+    str:any;
+    modifierProfil(modifierForm){
       modifierForm.value.societeDTO=this.updateeProfil.societeDTO;
       this.modifierFoorm=modifierForm.value
       Swal.fire({
@@ -293,29 +288,48 @@ str1:string;
         if (result.isConfirmed) {
 
           console.log("updateeTypeEntite id",this.updateeProfil.id);
+          console.log("updateeTypeEntite societeDTO id",this.updateeProfil.societeDTO.id);
           console.log("modifierForm",this.modifierFoorm)
 
           
           this.profilService.updateProfil(this.updateeProfil.id, this.updateeProfil.societeDTO.id , this.modifierFoorm , this.localUser.data.token).subscribe(
-            resp =>{
-              console.log('data -->',resp)
-              
+            data =>{
+              console.log('data -->',data)
+              this.datadelete=data;
+                          this.str=this.datadelete.statut;
+                          console.log('data -->',this.str)
+                        
+                      this.index = this.str.localeCompare( "SUCCESS");  
+
+                      console.log("index  : ",this.index)
+
+      if(this.index==0){
+            Swal.fire(
+              'Modifier!',
+              'Le profil est modifier.',
+              'success'
+            )}
+            else{
+              Swal.fire(
+              'Modifier!',
+              'Ce profil est deja enregestrer.',
+              'error'
+            )
+
+            }
             }
             
           );
          
-          Swal.fire(
-            'modifier!',
-            'Le Type Societe a été mis à jour.',
-            'success'
-          )
+          
           
         }
-        this.updateSubscription = interval(100).subscribe(
-          (val) => { 
-            this.getAllProfil();
+        this.getAllProfil();
+
+        // this.updateSubscription = interval(100).subscribe(
+        //   (val) => { 
     
-             });
+        //      });
       })
      
 
@@ -327,69 +341,52 @@ str1:string;
 
 
     }
-    typeentite:any;
-    typeentiteChoisie:any;
-    typeEntitChange(type){
-      this.getAllProfil();
 
-      console.log("console log",type)
-      this.typeentite=this.societeChoisie
-
-      for (let order of this.typeentite) {
-
-       if (type == order.id) {
-        this.typeentiteChoisie=order
-        console.log("console log2",order)
-
-       }
-
-      }
-    }
     datadelete:any;;
     str2:any
-    // deleteTypeEntite(typeEntite){
-    //   Swal.fire({
-    //     title: 'Êtes-vous sûr?',
-    //     text: "Vous ne pourrez pas revenir en arrière !",
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Oui , supprimer!'
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //   this.typeentiteService.deleteTypeSociete(typeEntite.id,typeEntite.societeDTO.id, this.localUser.data.token)
-    //                    .subscribe(data =>{
-    //                     this.datadelete=data;
-    //                     this.str2=this.datadelete.statut;
-    //                     console.log('data -->',this.str2)
+    deletePrfofil(profil){
+      Swal.fire({
+        title: 'Êtes-vous sûr?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui , supprimer!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+      this.profilService.deleteProfil(profil.id,profil.societeDTO.id, this.localUser.data.token)
+                       .subscribe(data =>{
+                        this.datadelete=data;
+                        this.str2=this.datadelete.statut;
+                        console.log('data -->',this.str2)
                       
-    //                 this.index = this.str2.localeCompare( "SUCCES");  
+                    this.index = this.str2.localeCompare( "SUCCES");  
 
-    //                 console.log("index  : ",this.index)
-    //                 this.getAllProfil();
+                    console.log("index  : ",this.index)
+                    this.getAllProfil();
 
 
-    // if(this.index==0){
-    //       Swal.fire(
-    //         'Supprimé!',
-    //         'La societe a été supprimé.',
-    //         'success'
-    //       )}
-    //       else{
-    //         Swal.fire(
-    //         'Supprimé!',
-    //         'vous peut pas supprimer , supprimer les champs reliés à la Type Entite.',
-    //         'error'
-    //       )
+    if(this.index==0){
+          Swal.fire(
+            'Supprimé!',
+            'Le profil a été supprimé.',
+            'success'
+          )}
+          else{
+            Swal.fire(
+            'Supprimé!',
+            'vous peut pas supprimer , supprimer les champs reliés à le profil.',
+            'error'
+          )
 
-    //       }
-    //       this.getAllProfil();
-    //       this.getAllProfil();
-    //     }
+          }
+          this.getAllProfil();
+          this.getAllProfil();
+        }
                       
-    //     );
-    //     }
-    //   })
-    // }
+        );
+        }
+      })
+    }
 }

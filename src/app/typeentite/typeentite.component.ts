@@ -357,14 +357,18 @@ if(this.array[j]){
           )
           
         }
-        this.updateSubscription = interval(100).subscribe(
-          (val) => { 
-            this.getAllsocieteEntite();
+        // this.updateSubscription = interval(100).subscribe(
+        //   (val) => { 
     
-             });
+        //      });
+
+        this.getAllsocieteEntite();
+        this.getAllsocieteEntite();
+
       })
      
 
+      this.getAllsocieteEntite();
 
 
       this.getAllsocieteEntite();

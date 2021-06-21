@@ -299,15 +299,19 @@ this.type=societe.typeSocieteDTO.id;
             )
             
           }
-          this.updateSubscription = interval(100).subscribe(
-            (val) => { 
-              this.getSociete();
+          // this.updateSubscription = interval(100).subscribe(
+          //   (val) => { 
       
-               });
+          //      });
+
+               this.getSociete();
+               this.getSociete();
+
         })
        
         this.getSociete();
-        
+        this.getSociete();
+
       
       }
 

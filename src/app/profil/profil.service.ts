@@ -37,10 +37,10 @@ export class ProfilService {
     return this.http.delete(this.API + '/admin/delete/profil/'+id+'/'+societe ,httpOptions);
   }
 
-  public updateProfil(id: number , societe:number, localite: any,token : String) {
+  public updateProfil(id: number , societe:number, profil: any,token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }
-    return this.http.patch(this.API + '/admin/delete/profil/'+id+'/'+societe ,httpOptions);
+    return this.http.patch(this.API + '/admin/patch/profil/'+id+'/'+societe ,profil ,httpOptions);
 
   }
 
