@@ -1,0 +1,50 @@
+<mat-nav-list>
+  <div class="logo py-4">
+    <img src="./assets/logo.svg" alt="Company Logo" />
+  </div>
+  <mat-divider></mat-divider>
+   <div ></div>
+   <div *ngIf="roleUser === 'ADMIN'">
+
+  <h2 matSubheader class="mt-2"></h2>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+    <mat-icon>dashboard</mat-icon> Type Societe
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
+    <mat-icon>home</mat-icon> Societe
+  </a>
+
+</div>
+
+
+<div *ngIf="roleUser === 'ADMIN' || roleUser === 'MODERATEUR'">
+
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/typeentite">
+    <mat-icon></mat-icon> Type Entite
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/entite">
+    <mat-icon></mat-icon>  Entite
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/localite">
+    <mat-icon></mat-icon>  Localite
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/profil">
+    <mat-icon></mat-icon>  Profil
+  </a>
+</div>
+
+
+<div *ngIf="test === 'test'">
+
+
+  <a mat-list-item routerLinkActive="list-item-active" (click)="deletestorage()">
+    <mat-icon></mat-icon> test
+  </a>
+</div>
+
+  
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/login">
+    <mat-icon></mat-icon> login
+  </a>
+</mat-nav-list>

@@ -1,0 +1,265 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Utilisateur</div>
+      <div class="page__content-data position-absolute">
+         <div class="card" style="padding: 20px; margin-top :30%; width: 120%; ">
+          
+          <div class="card-header" style="padding: 10px;">
+            <button class="btn btn-md btn-primary" (click)="open(content)">
+              <i class="fa fa-user"></i>New UtilisareurType Entite</button>
+            </div>
+            <div class="card-body">
+            <table class="table table-bordered my-3 w-100">
+              <thead>
+               
+                    
+                  <tr>
+                    <th>
+                        <span value="type" style="cursor: pointer;" (click) = "trier($event)">
+                           Entite
+                        </span>  
+                        <!-- <mat-icon class="user-image-icon ml-1">
+                          keyboard_arrow_down</mat-icon> -->
+                    </th>
+                    <th>
+                      <span value="type" style="cursor: pointer;" (click) = "trier($event)">
+                        profil
+                      </span>  
+                      <!-- <mat-icon class="user-image-icon ml-1">
+                        keyboard_arrow_down</mat-icon> -->
+                  </th>
+                  <th>
+                      <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                        Nom
+                      </span>  
+                      <!-- <mat-icon class="user-image-icon ml-1">
+                        keyboard_arrow_down</mat-icon> -->
+                  </th>
+                  <th>
+                    
+                    <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                      login
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th>
+                  <th>
+                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                      statut
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th>
+                  <th>
+                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                      Cree Par
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th><th>
+                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                      Cree Le
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th> 
+                  <th>
+                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                      Modifie Par
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th><th>
+                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                      Modifie Le
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                  </th>
+                  <th>Modifier</th>
+                  <th>Supprimer</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr>
+                    <!-- <td>{{societe.typeSocieteDTO.nom}}</td>
+                    <td>{{societe.nom}}</td>
+                    <td>{{societe.code}}</td>
+                    <td>{{societe.nomAbrege}}</td>
+                    <td>{{societe.statut}}</td> -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td> 
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button type="button" class="btn btn-primary" >Modifier</button></td>
+                    <td><button type="button" class="btn btn-danger" >Suprimer</button></td>
+                  <!-- <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, typeentite)">Modifier</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteEntite(entite)">Suprimer</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="del(entite)">Suprimer</button></td> -->
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic">Nouveau entite</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="form-group">
+          <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+            placeholder="societeDTO">
+        </div>
+  
+        <div class="form-group">
+          <label for="code">Entite :</label>
+          <!-- <select  (change)="changeCity($event)" formControlName="cityName"> -->
+  
+          <select id="selectedType" nom="selectedType" #selectedType  #selectedType = "ngModel" ngModel
+           (change)="typeEntiteChange(selectedType.value)"   class="form-control"   >
+            <option selected *ngFor="let type of societe"    [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+              placeholder="societeDTO">
+          </div>
+    
+          <div class="form-group">
+            <label for="code">Profil :</label>
+            <!-- <select  (change)="changeCity($event)" formControlName="cityName"> -->
+    
+            <select id="selectedType" nom="selectedType" #selectedType  #selectedType = "ngModel" ngModel
+             (change)="typeEntiteChange(selectedType.value)"   class="form-control"   >
+              <option selected *ngFor="let type of societe"    [value]="type.id">{{type.nom}}</option>
+            </select>
+          </div>
+      
+  
+        <div class="form-group">
+          <label for="nom">Nom :</label>
+          <input type="text"
+          required
+          minlength=2
+          maxlength=30
+          name="nom"
+          (keypress)="keyPressAlphabitique($event)"
+          #nom = "ngModel"
+          ngModel
+          id="nom" autofocus="online" autocomplete="off" class="form-control" placeholder="nom">
+        </div>
+        <div>
+          <div *ngIf = "nom.touched">
+            <div *ngIf="nom.errors.required"> This field is required </div>
+            <div *ngIf="nom.errors.minlength"> This field must have at leat 2 charactres </div>
+  
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="code">Login :</label>
+          <input type="text"   #code (ngModel)="code" name="code" id="code" class="form-control"
+            placeholder="code">
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="code">Statut :</label>
+            <input type="text"   #code (ngModel)="code" name="code" id="code" class="form-control"
+              placeholder="code">
+          </div>
+          
+    
+          
+    
+          
+
+
+        <div class="form-group mt-3">
+          <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+  
+  
+  <ng-template #contentt let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic">New App</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+  
+  
+        <div class="form-group">
+          <input type="hidden" #typeSocieteDTO (ngModel)="typeSocieteDTO" name="typeSocieteDTO" id="typeSocieteDTO" class="form-control"
+            placeholder="typeSocieteDTO">
+        </div>
+      
+        <div class="form-group">
+          <label for="code">type :</label>
+          <!-- <select  (change)="changeCity($event)" formControlName="cityName"> -->
+      
+          <select id="selectedType" nom="selectedType" #selectedType  #selectedType = "ngModel" ngModel
+           (change)="typeSocieteChange(selectedType.value)"   class="form-control"   >
+            <option selected *ngFor="let type of typeSociete"    [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+  
+  
+  
+        <div class="form-group">
+          <label for="nom">nom :</label>
+          <input type="text"
+          required
+          minlength=2
+          maxlength=30
+          name="nom"
+          (keypress)="keyPressAlphabitique($event)"
+          #nom = "ngModel"
+          ngModel
+          id="nom" autofocus="online" autocomplete="off" class="form-control" placeholder="nom">
+        </div>
+        <div>
+          <div *ngIf = "nom.touched">
+            <div *ngIf="nom.errors.required"> This field is required </div>
+            <div *ngIf="nom.errors.minlength"> This field must have at leat 2 charactres </div>
+  
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="code">code :</label>
+          <input type="text"   #code (ngModel)="code" name="code" id="code" class="form-control"
+            placeholder="code">
+        </div>
+        
+        <div class="form-group mt-3">
+          <input type="submit" value="Modifier" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+  </div>
+  
