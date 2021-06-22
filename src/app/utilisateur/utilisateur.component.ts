@@ -121,13 +121,14 @@ export class UtilisateurComponent implements OnInit {
   }
 
 
-
-  modifier(contentt, typeEntite) {
+  updateUtilisateur:any
+  modifier(contentt, utilisateur) {
     this.modalService.open(contentt, {
       centered: true,
       backdrop: 'static',
       size: 'lg'
     });
+    this.updateUtilisateur=utilisateur
 //     this.updateeTypeEntite=typeEntite;
 // console.log("updateeTypeEntite",this.updateeTypeEntite)
 //    this.typeenti=this.societeChoisie
@@ -140,7 +141,6 @@ export class UtilisateurComponent implements OnInit {
 //    }
 
   }
-  deleteUtilisateur(utilisateur){}
 
 
   getUtilisateur(){
@@ -246,7 +246,7 @@ export class UtilisateurComponent implements OnInit {
     this.role=this.localUser.data.roles[0]
     registerForm.value.entiteDTO=this.entite
     registerForm.value.profilDTO=this.profil
-    registerForm.value.roleDTOList=this.roles
+    registerForm.value.roleDTOList=this.rolesh
     
     console.log("societechoiParAdmin :",registerForm.value)
 
@@ -257,7 +257,7 @@ export class UtilisateurComponent implements OnInit {
     if(this.role==="MODERATEUR")
     {    this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
     registerForm.value.societeDTO=this.societecnct
-  }
+    }
       console.log("registerFormmm: ",registerForm.value)
       this.utilisateutService.registerUtilisateur(registerForm.value, this.localUser.data.token).subscribe(data => {
         
@@ -271,6 +271,191 @@ export class UtilisateurComponent implements OnInit {
 
 
   }
+
+
+
+
+
+  modifierFoorm:any;
+  str:any;
+  datadelete:any
+  index:any
+  modifierUtilisateur(modifierForm){
+    
+    
+    modifierForm.value.societeDTO=this.updateUtilisateur.societeDTO;
+
+
+    this.localUser = JSON.parse(localStorage.getItem('userData'));
+
+    this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
+    this.role=this.localUser.data.roles[0]
+    modifierForm.value.entiteDTO=this.entite
+    modifierForm.value.profilDTO=this.profil
+    modifierForm.value.roleDTOList=this.rolesh
+    this.modifierFoorm=modifierForm.value
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'modifier'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        console.log("modifierForm",this.modifierFoorm)
+
+        console.log("updateeTypeEntite societeDTO id ",this.updateUtilisateur.societeDTO.id) ;
+        
+        if(this.role==="ADMIN")
+          {     
+            this.utilisateutService.updateUtilisateurParAdmin(this.updateUtilisateur.id, this.updateUtilisateur.societeDTO.id , this.modifierFoorm , this.localUser.data.token).subscribe
+            (data =>{
+              console.log('data -->',data)
+    
+                            this.datadelete=data;
+                            this.str=this.datadelete.statut;
+                            console.log('data -->',this.str)
+                          
+                        this.index = this.str.localeCompare( "SUCCESS");  
+    
+                        console.log("index  : ",this.index)
+    
+              if(this.index==0){
+              Swal.fire(
+                'Modifier!',
+                'L utilisateur a été modifié.',
+                'success'
+              )}
+              else{
+                Swal.fire(
+                'Modifier!',
+                'vous peut pas modifier.',
+                'error'
+              )
+    
+              }
+              this.getUtilisateur();
+              this.getUtilisateur();
+    
+            }
+                          
+            );
+          }
+        if(this.role==="MODERATEUR")
+        {    
+          this.utilisateutService.updateUtilisateurParModerateur(this.updateUtilisateur.id, this.updateUtilisateur.societeDTO.id , this.modifierFoorm , this.localUser.data.token).subscribe
+        (data =>{
+          console.log('data -->',data)
+
+                        this.datadelete=data;
+                        this.str=this.datadelete.statut;
+                        console.log('data -->',this.str)
+                      
+                    this.index = this.str.localeCompare( "SUCCESS");  
+
+                    console.log("index  : ",this.index)
+
+          if(this.index==0){
+          Swal.fire(
+            'Modifié!',
+            'L utilisateur a été modifié.',
+            'success'
+          )}
+          else{
+            Swal.fire(
+            'Modifié!',
+            'vous peut pas modifier .',
+            'error'
+          )
+
+          }
+          this.getUtilisateur();
+          this.getUtilisateur();
+
+        }
+                      
+        );
+         }
+        
+          
+       
+        
+        
+      }
+      // this.updateSubscription = interval(100).subscribe(
+      //   (val) => { 
+  
+      //      });
+
+      this.getUtilisateur();
+      this.getUtilisateur();
+
+    })
+   
+
+    this.getUtilisateur();
+
+
+    this.getUtilisateur();
+
+
+
+
+  }
+
+
+
+  deleteUtilisateur(utilisateur){
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui , supprimer!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+    this.utilisateutService.deleteUtilisateur(utilisateur.id,utilisateur.societeDTO.id, this.localUser.data.token)
+                     .subscribe(data =>{
+                      this.datadelete=data;
+                      this.str=this.datadelete.statut;
+                      console.log('data -->',this.str)
+                    
+                  this.index = this.str.localeCompare( "SUCCES");  
+
+                  console.log("index  : ",this.index)
+                  this.getUtilisateur();
+
+
+  if(this.index==0){
+        Swal.fire(
+          'Supprimé!',
+          'L utilisateur a été supprimé.',
+          'success'
+        )}
+        else{
+          Swal.fire(
+          'Supprimé!',
+          'vous peut pas uttilisateur , supprimer les champs reliés à cette utilisateur.',
+          'error'
+        )
+
+        }
+        this.getUtilisateur();
+        this.getUtilisateur();
+      }
+                    
+      );
+      }
+    })
+  }
+
+
+
   entite:any
   entiteChange(entiteID){
     for (let order of this.listeEntite) {
@@ -293,11 +478,11 @@ export class UtilisateurComponent implements OnInit {
       }
    }
   }
-  roles:any=[]
+  rolesh:any=[]
   getRole(roleLibelle){
     this.utilisateutService.getRoles(roleLibelle,this.localUser.data.token)
-             .subscribe(data => {    this.roles[0] = data;
-              this.roles[0]=this.roles[0].data;
+             .subscribe(data => {    this.rolesh[0] = data;
+              this.rolesh[0]=this.rolesh[0].data;
 
 
               })

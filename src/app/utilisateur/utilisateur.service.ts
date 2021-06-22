@@ -32,19 +32,19 @@ export class UtilisateurService {
   public updateUtilisateurParAdmin(idtypeEntite:number , idSociete:number, entite: any, token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.patch(this.API + '/admin/utilisateurPourAdmin/'+idtypeEntite+'/'+idSociete, entite, httpOptions);//888
+    return this.http.patch(this.API + '/user/update/utilisateurPourAdmin/'+idtypeEntite+'/'+idSociete, entite, httpOptions);//888
   }
 
   public updateUtilisateurParModerateur(idUtilisateur:number , idSociete:number, entite: any, token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.patch(this.API + '/admin/utilisateurPourModerateur/'+idUtilisateur  +'/'+idSociete, entite, httpOptions);//888
+    return this.http.patch(this.API + '/user/update/utilisateurPourModerateur/'+idUtilisateur  +'/'+idSociete, entite, httpOptions);//888
   }
 
   public deleteUtilisateur(id: number,societe:number, token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.delete(this.API + '/admin/delete/utilisateur/'+id+'/'+societe, httpOptions);
+    return this.http.delete(this.API + '/user/delete/utilisateur/'+id+'/'+societe, httpOptions);
   }
   public getRoles(role:string, token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);

@@ -2,12 +2,12 @@
     <div class="d-flex page__box p-3 mt-2">Utilisateur</div>
       <div class="page__content-data position-absolute">
         
-            <div *ngIf="role === 'ADMIN'">
+            <div *ngIf="localUser.data.roles[0] === 'ADMIN'">
 
               <button class="btn btn-md btn-primary" (click)="open(content)">
              <i class="fa fa-user"></i>Ajouter Utilisateur</button>
            </div>
-           <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+           <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
 
             <button class="btn btn-md btn-primary" (click)="open(content)">
            <i class="fa fa-user"></i>Ajouter Utilisateur</button>
@@ -18,7 +18,7 @@
                     
                   <tr>
 
-                    <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+                    <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">
 
                       <th>
                         <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
@@ -94,13 +94,13 @@
                     <!-- <mat-icon class="user-image-icon ml-1">
                       keyboard_arrow_down</mat-icon> -->
                   </th>
-                  <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+                  <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
 
                   <th>Modifier</th>
                   <th>Supprimer</th>
                   </div>
 
-                  <div *ngIf="role === 'ADMIN'">
+                  <div *ngIf="localUser.data.roles[0] === 'ADMIN'">
 
                     <th>Modifier</th>
                     <th>Supprimer</th>
@@ -109,7 +109,7 @@
               </thead>
               <tbody class="tbody">
                 <tr *ngFor="let utilisateur of listUtilisateur">
-                  <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+                  <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">
                     <td>{{utilisateur.societeDTO.nom}}</td>
 
                   </div>
@@ -127,12 +127,12 @@
                     <td>{{utilisateur.lastModifedDate}}</td>
                     <td>{{utilisateur.lastModifiedBy}}</td>
 
-                    <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+                    <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
 
                   <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, utilisateur)">Modifier</button></td>
                   <td><button type="button" class="btn btn-danger" (click)="deleteUtilisateur(utilisateur)">Suprimer</button></td>
                    </div>
-                   <div *ngIf="role === 'ADMIN' ">
+                   <div *ngIf="localUser.data.roles[0] === 'ADMIN' ">
 
                     <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, utilisateur)">Modifier</button></td>
                     <td><button type="button" class="btn btn-danger" (click)="deleteUtilisateur(utilisateur)">Suprimer</button></td>
@@ -269,68 +269,120 @@
 
 
     <!-- ******MODIFIER****** -->
-  <ng-template #contentt let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic">Modifier Utilisareur</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-  
-  
-        <div class="form-group">
-          <input type="hidden" #typeSocieteDTO (ngModel)="typeSocieteDTO" name="typeSocieteDTO" id="typeSocieteDTO" class="form-control"
-            placeholder="typeSocieteDTO">
-        </div>
-      
-        <div class="form-group">
-          <label for="code">type :</label>
-          <!-- <select  (change)="changeCity($event)" formControlName="cityName"> -->
-      
-          <select id="selectedType" nom="selectedType" #selectedType  #selectedType = "ngModel" ngModel
-           (change)="typeSocieteChange(selectedType.value)"   class="form-control"   >
-            <option selected *ngFor="let type of typeSociete"    [value]="type.id">{{type.nom}}</option>
-          </select>
-        </div>
-  
-  
-  
-        <div class="form-group">
-          <label for="nom">nom :</label>
-          <input type="text"
-          required
-          minlength=2
-          maxlength=30
-          name="nom"
-          (keypress)="keyPressAlphabitique($event)"
-          #nom = "ngModel"
-          ngModel
-          id="nom" autofocus="online" autocomplete="off" class="form-control" placeholder="nom">
-        </div>
-        <div>
-          <div *ngIf = "nom.touched">
-            <div *ngIf="nom.errors.required"> This field is required </div>
-            <div *ngIf="nom.errors.minlength"> This field must have at leat 2 charactres </div>
-  
+    <ng-template #contentt let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic">Modifier Utilisateur</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #modifierForm="ngForm" (ngSubmit)="modifierUtilisateur(modifierForm)">
+          <div class="form-group">
+            <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+              placeholder="societeDTO">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="code">code :</label>
-          <input type="text"   #code (ngModel)="code" name="code" id="code" class="form-control"
-            placeholder="code">
-        </div>
-        
-        <div class="form-group mt-3">
-          <input type="submit" value="Modifier" class="btn btn-primary w-100" (click)="modal.close('Save click')">
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-    </div>
-  </ng-template>
+          <div class="form-group">
+            <input type="hidden" #tel (ngModel)="tel" name="societeDTO" id="tel" class="form-control"
+              placeholder="tel">
+          </div>
+          <div class="form-group">
+            <label for="typee"> Entite :</label>
+      
+            <select id="typee" nom="typee" 
+                class="form-control" #typee (ngModel)="typee"    (change)="entiteChange(typee.value)">
+              <option selected  *ngFor="let typee of listeEntite"    [value]="typee.id">{{typee.nom}}</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="typee"> Profil :</label>
+      
+            <select id="typ" nom="typee" 
+                class="form-control" #typ (ngModel)="typ"    (change)="profilChange(typ.value)">
+              <option selected  *ngFor="let typ of listeProfil"    [value]="typ.id">{{typ.nom}}</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="typee"> Role :</label>
+      
+            <select id="role" nom="typee" 
+                class="form-control" #role (ngModel)="role"    (change)="getRole(role.value)">
+                <option     value="ADMIN">Admin</option>
+                <option     value="UTILISATEUR">Utilisateur</option>
+              </select>
+          </div>
+          
+          
+    
+          <div class="form-group">
+            <label for="nom">Nom :</label>
+            <input type="text"
+            required
+            minlength=2
+            maxlength=30
+            name="nom"
+            (keypress)="keyPressAlphabitique($event)"
+            #nom [(ngModel)]="updateUtilisateur.nom"
+            id="nom" autofocus="online" autocomplete="off" class="form-control" placeholder="nom">
+          </div>
+          <div>
+            <div *ngIf = "nom.touched">
+              <div *ngIf="nom.errors?.required"> This field is required </div>
+              <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+    
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="prenom">Prenom :</label>
+            <input type="text"
+            required
+            minlength=2
+            maxlength=30
+            name="prenom"
+            (keypress)="keyPressAlphabitique($event)"
+            #prenom [(ngModel)]="updateUtilisateur.prenom"
+            id="prenom" autofocus="online" autocomplete="off" class="form-control" placeholder="prenom">
+          </div>
+          <div>
+            <div *ngIf = "prenom.touched">
+              <div *ngIf="prenom.errors?.required"> This field is required </div>
+              <div *ngIf="prenom.errors?.minlength"> This field must have at leat 2 charactres </div>
+    
+            </div>
+          </div>
+  
+          <div *ngIf="localUser.data.roles[0] === 'MODERATEUR'">
+
+          <div class="form-group">
+            <label for="password"> Nouveau Mode De Passe :</label>
+            <input type="password"   #password (ngModel)="password" name="password" id="password" class="form-control"
+              placeholder="password">
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="statut">Statut :</label>
+            <input type="text"   #statut [(ngModel)]="updateUtilisateur.statut" name="statut" id="statut" class="form-control"
+              placeholder="statut">
+          </div>
+            
+      
+            
+      
+            
+  
+  
+          <div class="form-group mt-3">
+            <input type="submit" value="Modifier" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      </div>
+    </ng-template>
     <!-- ******MODIFIER****** -->
 
   </div>
