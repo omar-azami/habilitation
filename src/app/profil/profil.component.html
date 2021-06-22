@@ -34,12 +34,12 @@
                   <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
 
                   <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, profil)">Modifier</button></td>
-                  <td><button type="button" class="btn btn-danger" (click)="deletePrfofil(profil)">Suprimer</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteProfil(profil)">Suprimer</button></td>
                   </div>
                   <div *ngIf="role === 'ADMIN' ">
 
                     <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, profil)">Modifier</button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deletePrfofil(profil)">Suprimer</button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="deleteProfil(profil)">Suprimer</button></td>
                     </div>
               </tr>
             </tbody>

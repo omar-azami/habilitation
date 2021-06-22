@@ -87,7 +87,7 @@ str1:string;
 
   }
   getAllProfil(){
-    if(this.localUser.data.roles[0]==="ADMINn")
+    if(this.localUser.data.roles[0]==="ADMIN")
     {
       this.idSociete=this.localUser.data.idSociete;
       this.profilService.getprofilBySociete(this.idSociete, this.localUser.data.token)
@@ -96,7 +96,7 @@ str1:string;
       })
      
     }
-    if(this.localUser.data.roles[0]==="ADMIN")
+    if(this.localUser.data.roles[0]==="MODERATEUR")
     {
     
     this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
@@ -344,7 +344,7 @@ str1:string;
 
     datadelete:any;;
     str2:any
-    deletePrfofil(profil){
+    deleteProfil(profil){
       Swal.fire({
         title: 'Êtes-vous sûr?',
         text: "Vous ne pourrez pas revenir en arrière !",

@@ -22,6 +22,7 @@ import { TypeentiteComponent } from './typeentite/typeentite.component';
 import { EntiteComponent } from './entite/entite.component';
 import { LocaliteComponent } from './localite/localite.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ApplicationComponent } from './application/application.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -39,6 +40,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     EntiteComponent,
     LocaliteComponent,
     ProfilComponent,
+    ApplicationComponent,
     
   ],
   imports: [

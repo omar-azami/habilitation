@@ -1,8 +1,356 @@
 <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Entite</div>
-      
- 
+  <div class="d-flex page__box p-3 mt-2"> Entite</div>
+    
+        <div class="card-header" style="padding: 10px; ">
+          <div *ngIf="role === 'ADMIN'">
+
+            <button class="btn btn-md btn-primary" (click)="open(content)">
+           <i class="fa fa-user"></i>Ajouter  entite</button>
+         </div>
+         <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+
+          <button class="btn btn-md btn-primary" (click)="open(content)">
+         <i class="fa fa-user"></i>Ajouter  entite</button>
+       </div>
+          </div>
+          <table class="table table-bordered my-3 w-100">
+            <thead>
+              <tr>
+                <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+
+                  <th>
+                    <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                      societe
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                </th>
+
+                </div>
+
+                <th>
+                  <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                    Type
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+              </th>
+                <th>
+                    <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                      Nom
+                    </span>  
+                    <!-- <mat-icon class="user-image-icon ml-1">
+                      keyboard_arrow_down</mat-icon> -->
+                </th>
+                <th>
+                  
+                  <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                    code
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                
+                <th>
+                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                    Type Mere
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                <th>
+                  
+                  <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                    localite
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                <th>
+                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                    Cree Par
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th><th>
+                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                    Cree Le
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                <th>
+                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                    Modifier Par
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                <th>
+                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                    Modifier Le
+                  </span>  
+                  <!-- <mat-icon class="user-image-icon ml-1">
+                    keyboard_arrow_down</mat-icon> -->
+                </th>
+                <div *ngIf="role === 'ADMIN' ">
+
+                <th>Edit</th>
+                <th>Delete</th>
+                </div>
+                <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  </div>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+              
+              <tr *ngFor="let entite of societeChoisie | paginate: { itemsPerPage: 4, currentPage: page, totalItems:totalLenght }">
+                <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+                  <td>{{entite.societeDTO.nom}}</td>
+
+                </div>
+                <td>{{entite.typeEntiteDTO.nom}}</td>
+                  <td>{{entite.nom}}</td>
+                  <td>{{entite.code}}</td>
+                  <div *ngIf="entite.entiteMereDTO === null"><td></td></div>
+                  <div *ngIf="entite.entiteMereDTO !== null"><td>{{entite.entiteMereDTO.nom}}</td></div>
+                  <td>{{entite.localiteDTO.nom}}</td>
+
+                  <td>{{entite.createdBy}}</td>
+                  <td>{{entite.createdDate}}</td>
+                  <td>{{entite.lastModifiedBy}}</td>
+                  <td>{{entite.lastModifedDate}}</td>
+                  
+
+                  
+                  <!-- <td>{{societe.nomAbrege}}</td>
+                  <td>{{societe.statut}}</td> -->
+                  <div *ngIf="role === 'ADMIN' ">
+                  <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, entite)">Modifier</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteEntite(entite)">Suprimer</button></td>
+                </div>
+
+                <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+                  <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, entite)">Modifier</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteEntite(entite)">Suprimer</button></td>
+                </div>
+                </tr>
+            </tbody>
+          </table>
+          <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+    
 
 
-  </div>
+
+<!-- AJOUTER -->
+<ng-template #content let-modal>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic">Nouveau  Entite</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <div class="form-group">
+      <input type="hidden" #entiteMereDTO (ngModel)="entiteMereDTO" name="entiteMereDTO" id="entiteMereDTO" class="form-control"
+        placeholder="typeEntiteMereDTO">
+    </div>
+    <div class="form-group">
+      <input type="hidden" #typeEntiteDTO (ngModel)="typeEntiteDTO" name="typeEntiteDTO" id="typeEntiteDTO" class="form-control"
+        placeholder="typeEntiteDTO">
+    </div>
+    <div class="form-group">
+      <input type="hidden" #localiteDTO (ngModel)="localiteDTO" name="localiteDTO" id="localiteDTO" class="form-control"
+        placeholder="localiteDTO">
+    </div>
+    <div class="form-group">
+      <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+        placeholder="societeDTO">
+
+        <div *ngIf="cnct === 'Afficher'">
+
+
+        <div class="form-group">
+          <label for="type">societe :</label>
   
+          <select id="societe" nom="type" 
+              class="form-control" #societe (ngModel)="societe"    (change)="typeSocieteeChange(societe.value)">
+            <option selected  *ngFor="let societe of listSociete"    [value]="societe.id">{{societe.nom}}</option>
+          </select>
+        </div></div>
+      </div>
+
+
+    <div class="form-group">
+      <label for="type">Type Mere:</label>
+
+      <select id="type" nom="type" 
+          class="form-control" #type (ngModel)="type"    (change)="typeSocieteChange(type.value)">
+        <option selected  *ngFor="let type of societeChoisie"    [value]="type.id">{{type.nom}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="typee">Type Entite :</label>
+
+      <select id="typee" nom="typee" 
+          class="form-control" #typee (ngModel)="typee"    (change)="typeEntiteChange(typee.value)">
+        <option selected  *ngFor="let typee of typeEEntite"    [value]="typee.id">{{typee.nom}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="localit">Localite :</label>
+
+      <select id="localit" nom="localit" 
+          class="form-control" #localit (ngModel)="localit"    (change)="localiteChange(localit.value)">
+        <option selected  *ngFor="let localit of localite"    [value]="localit.id">{{localit.nom}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="nom">nom :</label>
+      <input type="text"
+      required
+
+      ng-paste="$event.preventDefault();"
+      minlength=2
+      maxlength=30
+      name="nom"
+      (keypress)="keyPressAlphabitique($event)"
+      #nom = "ngModel"
+      ngModel
+      id="nom"  autocomplete="off" class="form-control" placeholder="nom">
+    </div>
+    <div>
+      <div *ngIf = "nom.touched">
+        <div *ngIf="nom.errors?.required"> This field is required </div>
+        <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="code">code :</label>
+      <input type="text"   #code (ngModel)="code" name="code" id="code" class="form-control"
+        placeholder="code">
+    </div>
+
+    <div class="form-group">
+      <label for="localit">Localite :</label>
+
+      <select id="localit" nom="localit" 
+          class="form-control" #localit (ngModel)="localit"    (change)="localiteChange(localit.value)">
+        <option selected  *ngFor="let localit of localite"    [value]="localit.id">{{localit.nom}}</option>
+      </select>
+    </div>
+    
+    <div class="form-group mt-3">
+      <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+</div>
+</ng-template>
+<!-- AJOUTER -->
+
+<!-- MODIFIER -->
+<ng-template #contentt let-modal>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic">Modifier  Type Entite</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #modifierForm="ngForm" (ngSubmit)="modifierEntite(modifierForm)">
+
+
+
+     <div class="form-group">
+      <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+        placeholder="societeDTO">
+    </div>
+    
+    <div class="form-group">
+      <input type="hidden" #localiteDTO (ngModel)="localiteDTO" name="localiteDTO" id="localiteDTO" class="form-control"
+        placeholder="localiteDTO">
+    </div>
+
+    <div class="form-group">
+      <label for="type"> Type Entite :</label>
+
+      <select id="typ" nom="typeEntiteMereDTO"  
+          class="form-control" #typ (ngModel)="typ"    (change)="typeEntiteChange(typ.value)">
+          <option   *ngFor="let typ of typeEEntite"    [value]="typ.id">{{typ.nom}}</option>
+      </select>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <label for="type"> Entite Mere :</label>
+
+      <select id="type" nom="typeEntiteMereDTO"  
+          class="form-control" #type (ngModel)="type"    (change)="typeEntitChange(type.value)">
+        <div *ngIf="updateeTypeEntite.entiteMereDTO !==null">
+
+          <option      [value]="updateeTypeEntite.entiteMereDTO.id">{{updateeTypeEntite.entiteMereDTO.nom}}</option>
+        </div>
+          <option   *ngFor="let type of typeenti"    [value]="type.id">{{type.nom}}</option>
+      </select>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="nom">nom :</label>
+      <input type="text"
+      required
+        
+      minlength=2
+      maxlength=30
+      name="nom"
+      (keypress)="keyPressAlphabitique($event)"
+      #nom [(ngModel)]="updateeTypeEntite.nom"
+      id="nom"  autocomplete="off" class="form-control" placeholder="nom">
+    </div>
+    <div>
+      <div *ngIf = "nom.touched">
+        <div *ngIf="nom.errors?.required"> This field is required </div>
+        <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="code">code :</label>
+      <input type="text"   #code [(ngModel)]="updateeTypeEntite.code" name="code" id="code" class="form-control"
+        placeholder="code">
+    </div>
+
+    <div class="form-group">
+      <label for="localit">Localite :</label>
+
+      <select id="localit" nom="localit" 
+          class="form-control" #localit (ngModel)="localit"    (change)="localiteChange(localit.value)">
+        <option selected  *ngFor="let localit of localite"    [value]="localit.id">{{localit.nom}}</option>
+      </select>
+    </div>
+    
+    
+    <div class="form-group mt-3">
+      <input type="submit" value="Modifier" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+</div>
+</ng-template>
+<!-- MODIFIER -->
+</div>

@@ -42,6 +42,12 @@ export class LocaliteService {
     const httpOptions = { headers: headers_object  }
     return this.http.patch(this.API + '/admin/patch/localite/'+id ,localite, httpOptions);
   }
+  public getLocaliteParId(id: number, token : String) {
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
+    const httpOptions = { headers: headers_object  }
+    
+    return this.http.get(this.API + '/admin/show/localite/id/'+id, httpOptions);
+  }
 
 }
 
