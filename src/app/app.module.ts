@@ -23,6 +23,7 @@ import { EntiteComponent } from './entite/entite.component';
 import { LocaliteComponent } from './localite/localite.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ApplicationComponent } from './application/application.component';
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -41,6 +42,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LocaliteComponent,
     ProfilComponent,
     ApplicationComponent,
+    UtilisateurComponent,
     
   ],
   imports: [
