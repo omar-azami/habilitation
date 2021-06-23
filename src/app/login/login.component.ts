@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   
+    this.router.navigate(['/login'])
+
   }
 
 

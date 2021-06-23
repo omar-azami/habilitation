@@ -9,6 +9,8 @@ import { LocaliteComponent } from './localite/localite.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ApplicationComponent } from './application/application.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { PartailsComponent } from './partails/partails.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'application', component: ApplicationComponent },
   { path: 'utilisateur', component: UtilisateurComponent },
+  { path: 'partails', component: PartailsComponent },
+  { path: 'app', component: AppComponent },
 
 ];
 

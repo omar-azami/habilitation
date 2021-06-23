@@ -26,6 +26,7 @@ import { ApplicationComponent } from './application/application.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PartailsComponent } from './partails/partails.component';
 
 
 
@@ -43,6 +44,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ProfilComponent,
     ApplicationComponent,
     UtilisateurComponent,
+    PartailsComponent,
     
   ],
   imports: [

@@ -1,90 +1,4 @@
-<div class="container-fluid page">
-  <div class="d-flex page__box p-3 mt-2">Type Societe</div>
-    
-        <div class="card-header" style="padding: 2px;">
-          <button class="btn btn-md btn-primary" (click)="open(content)">
-            <i class="fa fa-user"></i>Nouveau Type Societe</button>
-          </div>
-          <table class="table table-bordered my-3 w-100">
-            <thead>
-              <tr>
-                <th>
-                    <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                      Nom
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  
-                  <span value="code" style="cursor: pointer;" (click) = "trier($event)">
-                    code
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
-                    Nom Abrege
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                    statut
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
-                    Cree Par
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th><th>
-                  <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
-                    Cree Le
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
-                    Modifier Par
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
-                    Modifier Le
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                
-                <th>Modifier</th>
-                <th>Suprimer</th>
-              </tr>
-            </thead>
-            <tbody class="tbody">
-              <tr *ngFor="let typeSociete of listTypeSociete | paginate: { itemsPerPage: 2, currentPage: page, totalItems:totalLenght }">
-                  <td>{{typeSociete.nom}}</td>
-                  <td>{{typeSociete.code}}</td>
-                  <td>{{typeSociete.nomAbrege}}</td>
-                  <td>{{typeSociete.statut}}</td>
-                  <td>{{typeSociete.createdBy}}</td>
-                  <td>{{typeSociete.createdDate}}</td>
-                  <td>{{typeSociete.lastModifiedBy}}</td>
-                  <td>{{typeSociete.lastModifedDate}}</td>
-                  <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, typeSociete)">Modifier</button></td>
-                  <td><button type="button" class="btn btn-danger" (click)="deleteTypeSociete(typeSociete)">Suprimer</button></td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
 
     
 <!-- AJOUTER -->
@@ -229,4 +143,88 @@
   </div>
 </ng-template>
 <!-- MODIFIER -->
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Type <b>Societe</b></h2>
+        </div>
+        <div class="col-sm-6">
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      
+      <thead>
+        <tr>
+          <th>
+              <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                Nom
+              </span>  
+          </th>
+          <th>
+            
+            <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+              code
+            </span>  
+          </th>
+          <th>
+            <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
+              Nom Abrege
+            </span>  
+          </th>
+          <th>
+            <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+              statut
+            </span> 
+          </th>
+          <th>
+            <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
+              Cree Par
+            </span>  
+          </th><th>
+            <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
+              Cree Le
+            </span>  
+          </th>
+          <th>
+            <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
+              Modifier Par
+            </span>  
+          </th>
+          <th>
+            <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
+              Modifier Le
+            </span>  
+          </th>
+          
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let typeSociete of listTypeSociete | paginate: { itemsPerPage: 10, currentPage: page, totalItems:totalLenght }">
+          <td>{{typeSociete.nom}}</td>
+          <td>{{typeSociete.code}}</td>
+          <td>{{typeSociete.nomAbrege}}</td>
+          <td>{{typeSociete.statut}}</td>
+          <td>{{typeSociete.createdBy}}</td>
+          <td>{{typeSociete.createdDate  | date:'mediumDate'}}</td>
+          <td>{{typeSociete.lastModifiedBy}}</td>
+          <td>{{typeSociete.lastModifedDate | date:'mediumDate'}}</td>
+          <td>
+            <a (click)="modifier(contentt, typeSociete)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+            <a (click)="deleteTypeSociete(typeSociete)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+          </td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+  </div>
 </div>
