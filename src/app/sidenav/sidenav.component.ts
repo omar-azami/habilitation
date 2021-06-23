@@ -39,8 +39,9 @@ if(storageAvailable('localStorage') ){
           }
           //   this.test="";
 
+          if(this.localUser!=null){
           this.roleUser=this.localUser.data.roles[0]
-
+        }
            });
           }
 

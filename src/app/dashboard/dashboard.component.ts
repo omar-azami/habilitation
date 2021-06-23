@@ -5,7 +5,6 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TypesocieteService } from './typesociete.service';
 import Swal from 'sweetalert2'
 import { Subscription } from 'rxjs/internal/Subscription';
-import { interval } from 'rxjs/internal/observable/interval';
 
 
 @Component({

@@ -1,42 +1,21 @@
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8 login-box">
-                <div class="col-lg-12 login-key">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
-                <div class="col-lg-12 login-title">
-                    ADMIN PANEL
-                </div>
 
-                <div class="col-lg-12 login-form">
-                    <div class="col-lg-12 login-form">
-                        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-                            <div class="form-group">
-                                <label class="form-control-label">USERNAME</label>
-                                <input type="text" class="form-control" #login (ngModel)="login" id="login" name="login">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">PASSWORD</label>
-                                <input type="password" class="form-control" id="password" #password (ngModel)="password" name="password">
-                            </div>
+        <div class="container">
+            <div class="left">
+              <div class="header">
+                <h2 class="animation a1">Welcome Back</h2>
+                <h4 class="animation a2">Log in to your account using email and password</h4>
+              </div>
+              <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
 
-                            <div class="col-lg-12 loginbttm">
-                                <div class="col-lg-6 login-btm login-text">
-                                    <!-- Error Message -->
-                                </div>
-                                <div class="col-lg-6 login-btm login-button">
-                                    <input type="submit" value="LOGIN" class="btn btn-primary" >
+              <div class="form">
+                <input type="email" class="form-field animation a3" placeholder="Email Address" #login (ngModel)="login" id="login" name="login">
+                <input type="password" class="form-field animation a4" placeholder="Password" id="password" #password (ngModel)="password" name="password"> 
 
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-2"></div>
+                <button class="animation a6">LOGIN</button>
+              </div>
+              </form>
             </div>
-        </div>
-
-
-
+            <div class="right"></div>
+          </div>
+          
