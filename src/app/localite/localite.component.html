@@ -1,54 +1,3 @@
-<div class="container-fluid page">
-  <div class="d-flex page__box p-3 mt-2">Type Societe</div>
-    
-        <div class="card-header" style="padding: 2px;">
-          <button class="btn btn-md btn-primary" (click)="open(content)">
-            <i class="fa fa-user"></i>Nouveau Localite</button>
-          </div>
-          <table class="table table-bordered my-3 w-100">
-            <thead>
-              <tr>
-                <th>
-                    <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                      Nom
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  
-                  <span value="code" style="cursor: pointer;" (click) = "trier($event)">
-                    code
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-                <th>
-                  <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
-                    Nom Abrege
-                  </span>  
-                  <!-- <mat-icon class="user-image-icon ml-1">
-                    keyboard_arrow_down</mat-icon> -->
-                </th>
-               
-               
-                
-                <th>Modifier</th>
-                <th>Suprimer</th>
-              </tr>
-            </thead>
-            <tbody class="tbody">
-              <tr *ngFor="let localite of listLocalite | paginate: { itemsPerPage: 2, currentPage: page, totalItems:totalLenght }">
-                  <td>{{localite.nom}}</td>
-                  <td>{{localite.code}}</td>
-                  <td>{{localite.nomAbrege}}</td>
-                  
-                  <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, localite)">Modifier</button></td>
-                  <td><button type="button" class="btn btn-danger" (click)="deleteLocalite(localite)">Suprimer</button></td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
 
     
 <!-- AJOUTER -->
@@ -185,4 +134,63 @@
   </div>
 </ng-template>
 <!-- MODIFIER -->
+
+
+
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2> <b>Localite</b></h2>
+        </div>
+        <div class="col-sm-6">
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Localite</span></a>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      
+      
+
+      <thead>
+        <tr>
+          <th>
+              <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                Nom
+              </span>   </th>
+          <th>
+            
+            <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+              code
+            </span> </th>
+          <th>
+            <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
+              Nom Abrege
+            </span>   </th>
+         
+         
+          
+            <th>Actions</th>
+
+        </tr>
+      <tbody>
+        <tr *ngFor="let localite of listLocalite  | paginate: { itemsPerPage: 10, currentPage: page, totalItems:totalLenght }">
+          <td>{{localite.nom}}</td>
+          <td>{{localite.code}}</td>
+          <td>{{localite.nomAbrege}}</td>
+          <td>
+            <a (click)="modifier(contentt, localite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+            <a (click)="deleteLocalite(localite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+          </td>
+        </tr>
+        
+        
+
+
+      </tbody>
+    </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+  </div>
 </div>

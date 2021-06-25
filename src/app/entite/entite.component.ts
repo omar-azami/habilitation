@@ -44,6 +44,8 @@ str1:string;
   typeenti:any;
   localite:any
   array:any=[];
+  array2:any=[];
+  array3:any=[];
   // this.societeService.getSociet(this.admin, this.localUser)
   // .subscribe(data => {;
 
@@ -351,6 +353,7 @@ gettypeEEntite(){
     boucletypeMere:any;
     typeentit:any
     i:number;
+    j:number
     lenght:number;
     modifier(contentt, typeEntite) {
       this.modalService.open(contentt, {
@@ -372,9 +375,15 @@ console.log("updateeTypeEntite",this.updateeTypeEntite)
      this.getAllsocieteEntite();
      this.typeentit=this.societeChoisie
      this.i=0;
+     this.j=0;
+     
+     this.array=[]
    for (let order of this.typeenti) {
     this.boucletypeMere=order;
-
+    this.array3[this.j]=order;
+    
+    
+    this.j=this.j+1;
       while (this.boucletypeMere) {
 
         
@@ -394,10 +403,14 @@ console.log("updateeTypeEntite",this.updateeTypeEntite)
      
 
     }
+    this.i=0;
+    this.j=0;
     this.lenght=this.array.length
-    for (let j = 0; j < this.lenght; j++) {
-if(this.array[j]){
-      this.typeenti.splice(this.typeenti.indexOf(this.array[j]), 1);
+        this.array2=this.array3
+    this.lenght=this.array.length
+    for (let k = 0; k < this.lenght; k++) {
+if(this.array[k]){
+      this.array2.splice(this.array2.indexOf(this.array[k]), 1);
     }
     }
     }

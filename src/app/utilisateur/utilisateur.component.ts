@@ -25,7 +25,7 @@ export class UtilisateurComponent implements OnInit {
   idCnct:any;
   cnct:any;
   role:any;
-  listUtilisateur:any;
+  listUtilisateur:any=[];
   idSociete:any;
   listeEntite:any;
 
@@ -45,6 +45,8 @@ export class UtilisateurComponent implements OnInit {
 
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
+    this.totalLenght=this.listUtilisateur.length;
+
     this.updateSubscription = interval(100).subscribe(
       (val) => {       
         this.societecnct = JSON.parse(localStorage.getItem('admicnct'));

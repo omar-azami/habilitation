@@ -44,6 +44,9 @@ str1:string;
   typeEntiteDependDeAdmin:any;
   typeenti:any
   array:any=[];
+  array2:any=[];
+  array3:any=[];
+   
   // this.societeService.getSociet(this.admin, this.localUser)
   // .subscribe(data => {;
 
@@ -83,7 +86,7 @@ str1:string;
         this.connecte();
 
          });
-         
+
          this.getAllsocieteEntite();
          this.getSociete();
 
@@ -95,6 +98,7 @@ str1:string;
       this.typeentiteService.getSociete(this.idSociete, this.localUser.data.token)
        .subscribe(data => {this.societeChoisie=data;
         this.societeChoisie=this.societeChoisie.collection
+
       })
      
     }
@@ -270,8 +274,10 @@ str1:string;
     boucletypeMere:any;
     typeentit:any
     i:number;
+    j:number
     lenght:number;
     modifier(contentt, typeEntite) {
+
       this.modalService.open(contentt, {
         centered: true,
         backdrop: 'static',
@@ -287,11 +293,20 @@ str1:string;
           break;
       }
      }
-
+     
      this.getAllsocieteEntite();
      this.typeentit=this.societeChoisie
+     
      this.i=0;
+     this.j=0;
+     this.array=[]
    for (let order of this.typeenti) {
+    
+        this.array3[this.j]=order;
+    
+    
+    this.j=this.j+1;
+
     this.boucletypeMere=order;
 
       while (this.boucletypeMere) {
@@ -303,22 +318,26 @@ str1:string;
          if(this.boucletypeMere.id==typeEntite.id){
           this.array[this.i]=order;
           this.i=this.i+1;
-
           // this.typeenti.splice(this.typeenti.indexOf(this.boucletypeMere), 1);
           // this.typeenti.splice(this.typeenti.indexOf(order), 1);
 
          }
          this.boucletypeMere=this.boucletypeMere.typeEntiteMereDTO;
       }
-     
 
     }
+
+    this.i=0;
+    this.j=0;
     this.lenght=this.array.length
-    for (let j = 0; j < this.lenght; j++) {
-if(this.array[j]){
-      this.typeenti.splice(this.typeenti.indexOf(this.array[j]), 1);
+        this.array2=this.array3
+        for (let k = 0; k < this.lenght; k++) {
+if(this.array[k]!=null){
+      this.array2.splice(this.array2.indexOf(this.array[k]), 1);
     }
+
     }
+
     }
 
     modifierFoorm:any;
@@ -345,7 +364,8 @@ if(this.array[j]){
           this.typeentiteService.updateTypeEntite(this.updateeTypeEntite.id, this.updateeTypeEntite.societeDTO.id , this.modifierFoorm , this.localUser.data.token).subscribe(
             resp =>{
               console.log('data -->',resp)
-              
+              this.getAllsocieteEntite();
+
             }
             
           );
@@ -355,7 +375,8 @@ if(this.array[j]){
             'Le Type Societe a été mis à jour.',
             'success'
           )
-          
+          this.getAllsocieteEntite();
+
         }
         // this.updateSubscription = interval(100).subscribe(
         //   (val) => { 

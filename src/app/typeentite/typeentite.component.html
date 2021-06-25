@@ -1,132 +1,4 @@
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Type Entite</div>
-      
-          <div class="card-header" style="padding: 10px; ">
-            <div *ngIf="role === 'ADMIN'">
 
-              <button class="btn btn-md btn-primary" (click)="open(content)">
-             <i class="fa fa-user"></i>Ajouter Type entite</button>
-           </div>
-           <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-
-            <button class="btn btn-md btn-primary" (click)="open(content)">
-           <i class="fa fa-user"></i>Ajouter Type entite</button>
-         </div>
-            </div>
-            <table class="table table-bordered my-3 w-100">
-              <thead>
-                <tr>
-                  <div *ngIf="role === 'MODERATEUR' && societecnct===null">
-
-                    <th>
-                      <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                        Societe
-                      </span>  
-                      <!-- <mat-icon class="user-image-icon ml-1">
-                        keyboard_arrow_down</mat-icon> -->
-                  </th>
-
-                  </div>
-
-
-                  <th>
-                      <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                        Nom
-                      </span>  
-                      <!-- <mat-icon class="user-image-icon ml-1">
-                        keyboard_arrow_down</mat-icon> -->
-                  </th>
-                  <th>
-                    
-                    <span value="code" style="cursor: pointer;" (click) = "trier($event)">
-                      code
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th>
-                 
-                  <th>
-                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                      Type Mere
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th>
-                  <th>
-                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                      Cree Par
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th><th>
-                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                      Cree Le
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th>
-                  <th>
-                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                      Modifier Par
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th>
-                  <th>
-                    <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                      Modifier Le
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                  </th>
-                  <div *ngIf="role === 'ADMIN' ">
-
-                  <th>Edit</th>
-                  <th>Delete</th>
-                  </div>
-                  <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    </div>
-                </tr>
-              </thead>
-              <tbody class="tbody">
-                
-                <tr *ngFor="let typeEntite of societeChoisie | paginate: { itemsPerPage: 4, currentPage: page, totalItems:totalLenght }">
-                  <div *ngIf="role === 'MODERATEUR' && societecnct===null">
-                    <td>{{typeEntite.societeDTO.nom}}</td>
-
-                  </div>
-
-                    <td>{{typeEntite.nom}}</td>
-                    <td>{{typeEntite.code}}</td>
-                    <div *ngIf="typeEntite.typeEntiteMereDTO === null"><td></td></div>
-                    <div *ngIf="typeEntite.typeEntiteMereDTO !== null"><td>{{typeEntite.typeEntiteMereDTO.nom}}</td></div>
-                    <td>{{typeEntite.createdBy}}</td>
-                    <td>{{typeEntite.createdDate}}</td>
-                    <td>{{typeEntite.lastModifiedBy}}</td>
-                    <td>{{typeEntite.lastModifedDate}}</td>
-                    
-
-                    
-                    <!-- <td>{{societe.nomAbrege}}</td>
-                    <td>{{societe.statut}}</td> -->
-                    <div *ngIf="role === 'ADMIN' ">
-                    <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, typeEntite)">Modifier</button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deleteTypeEntite(typeEntite)">Suprimer</button></td>
-                  </div>
-
-                  <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-                    <td><button type="button" class="btn btn-primary" (click)="modifier(contentt, typeEntite)">Modifier</button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deleteTypeEntite(typeEntite)">Suprimer</button></td>
-                  </div>
-                  </tr>
-              </tbody>
-            </table>
-            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
-
-      
 
 
 
@@ -237,7 +109,7 @@
 
             <option      [value]="updateeTypeEntite.typeEntiteMereDTO.id">{{updateeTypeEntite.typeEntiteMereDTO.nom}}</option>
           </div>
-            <option   *ngFor="let type of typeenti"    [value]="type.id">{{type.nom}}</option>
+            <option   *ngFor="let type of array2"    [value]="type.id">{{type.nom}}</option>
         </select>
       </div>
 
@@ -286,5 +158,131 @@
   </div>
 </ng-template>
 <!-- MODIFIER -->
-  </div>
   
+
+
+  
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2> <b>Type Entite</b></h2>
+        </div>
+        <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+
+        <div class="col-sm-6">
+
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
+        </div>
+        </div>
+        <div *ngIf="role === 'ADMIN' ">
+
+          <div class="col-sm-6">
+
+            <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
+          </div>
+          </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+
+        <thead>
+          <tr>
+            <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+
+              <th>
+                <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                  Societe
+                </span>    </th>
+
+            </div>
+            <th>
+                <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                  Nom
+                </span> </th>
+            <th>
+              
+              <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                code
+              </span> </th>
+           
+            <th>
+              <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                Type Mere
+              </span>   </th>
+            <th>
+              <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                Cree Par
+              </span>   </th><th>
+              <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                Cree Le
+              </span>   </th>
+            <th>
+              <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                Modifier Par
+              </span>   </th>
+            <th>
+              <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                Modifier Le
+              </span>   </th>
+            <div *ngIf="role === 'ADMIN' ">
+
+              <th>Actions</th>
+
+            </div>
+            <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+
+              <th>Actions</th>
+
+              </div>
+          </tr>
+        </thead>
+
+
+
+      <tbody>
+
+       <tr *ngFor="let typeEntite of societeChoisie | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
+            <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+              <td>{{typeEntite.societeDTO.nom}}</td>
+
+            </div>
+
+              <td>{{typeEntite.nom}}</td>
+              <td>{{typeEntite.code}}</td>
+              <div *ngIf="typeEntite.typeEntiteMereDTO == null"><td></td></div>
+              <div *ngIf="typeEntite.typeEntiteMereDTO != null"><td>{{typeEntite.typeEntiteMereDTO.nom}}</td></div>
+              <td>{{typeEntite.createdBy}}</td>
+              <td>{{typeEntite.createdDate | date:'mediumDate'}}</td>
+              <td>{{typeEntite.lastModifiedBy}}</td>
+              <td>{{typeEntite.lastModifedDate | date:'mediumDate'}}</td>
+              
+
+              <div *ngIf="role === 'ADMIN' ">
+                <td>
+                  <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                  <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                </td></div>
+
+            <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+              <td>
+                <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              </td></div>
+            </tr>
+        
+        
+      </tbody>
+    </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+  </div>
+</div>
+
+
+
+
+
+
+

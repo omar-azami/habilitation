@@ -298,7 +298,7 @@
 
       <tbody>
 
-        <tr *ngFor="let entite of societeChoisie | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
+        <tr *ngFor="let entite of societeChoisie | paginate: { itemsPerPage: 4, currentPage: page, totalItems:totalLenght }">
           <div *ngIf="role === 'MODERATEUR' && societecnct===null">
             <td>{{entite.societeDTO.nom}}</td>
 
@@ -311,7 +311,7 @@
             <td>{{entite.localiteDTO.nom}}</td>
 
             <td>{{entite.createdBy }}</td>
-            <td>{{entite.createdDate| date:'mediumDate'}}</td>
+            <td>{{entite.createdDate | date:'mediumDate'}}</td>
             <td>{{entite.lastModifiedBy }}</td>
             <td>{{entite.lastModifedDate| date:'mediumDate'}}</td>
             
