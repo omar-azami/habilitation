@@ -1,0 +1,368 @@
+
+
+
+
+<!-- AJOUTER -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic">Nouveau  Menu</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="form-group">
+          <input type="hidden" #menuPereDTO (ngModel)="menuPereDTO" name="menuPereDTO" id="menuPereDTO" class="form-control"
+            placeholder="menuPereDTO">
+        </div>
+        <div class="form-group">
+          <input type="hidden" #applicationDTO (ngModel)="applicationDTO" name="applicationDTO" id="typeEntiteDTO" class="form-control"
+            placeholder="applicationDTO">
+        </div>
+        <div class="form-group">
+          <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+            placeholder="societeDTO">
+    
+            <div *ngIf="cnct === 'Afficher'">
+    
+    
+            <div class="form-group">
+              <label for="type">societe :</label>
+      
+              <select id="societe" nom="type" 
+                  class="form-control" #societe (ngModel)="societe"    (change)="typeSocieteeChange(societe.value)">
+                <option selected  *ngFor="let societe of listSociete"    [value]="societe.id">{{societe.nom}}</option>
+              </select>
+            </div></div>
+          </div>
+    
+    
+        <div class="form-group">
+          <label for="type">Menu Pere:</label>
+    
+          <select id="type" nom="type" 
+              class="form-control" #type (ngModel)="type"    (change)="typeSocieteChange(type.value)">
+            <option selected  *ngFor="let type of societeChoisie"    [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="typee">Application :</label>
+    
+          <select id="typee" nom="typee" 
+              class="form-control" #typee (ngModel)="typee"    (change)="typeEntiteChange(typee.value)">
+            <option selected  *ngFor="let typee of typeEEntite"    [value]="typee.id">{{typee.nom}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="code">Type :</label>
+            <input type="text"   #type (ngModel)="type" name="type" id="type" class="form-control"
+              placeholder="type">
+          </div>
+        
+        <div class="form-group">
+          <label for="nom">nom :</label>
+          <input type="text"
+          required
+    
+          ng-paste="$event.preventDefault();"
+          minlength=2
+          maxlength=30
+          name="nom"
+          (keypress)="keyPressAlphabitique($event)"
+          #nom = "ngModel"
+          ngModel
+          id="nom"  autocomplete="off" class="form-control" placeholder="nom">
+        </div>
+        <div>
+          <div *ngIf = "nom.touched">
+            <div *ngIf="nom.errors?.required"> This field is required </div>
+            <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+    
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description :</label>
+          <input type="text"   #description (ngModel)="description" name="description" id="description" class="form-control"
+            placeholder="description">
+        </div>
+        <div class="form-group">
+            <label for="lien">Lien :</label>
+            <input type="text"   #lien (ngModel)="lien" name="lien" id="lien" class="form-control"
+              placeholder="lien">
+          </div>
+          <div class="form-group">
+            <label for="parametre">Parametre :</label>
+            <input type="text"   #parametre (ngModel)="parametre" name="parametre" id="parametre" class="form-control"
+              placeholder="parametre">
+          </div>
+          <div class="form-group">
+            <label for="ordre">Ordre :</label>
+            <input type="text"   #ordre (ngModel)="ordre" name="ordre" id="ordre" class="form-control"
+              placeholder="ordre">
+          </div>
+       
+        
+        <div class="form-group mt-3">
+          <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+    </ng-template>
+    <!-- AJOUTER -->
+    
+    <!-- MODIFIER -->
+    <ng-template #contentt let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic">Modifier  Entite</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #modifierForm="ngForm" (ngSubmit)="modifierEntite(modifierForm)">
+    
+    
+    
+         <div class="form-group">
+          <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
+            placeholder="societeDTO">
+        </div>
+        
+        <div class="form-group">
+          <input type="hidden" #localiteDTO (ngModel)="localiteDTO" name="localiteDTO" id="localiteDTO" class="form-control"
+            placeholder="localiteDTO">
+        </div>
+    
+        <div class="form-group">
+          <label for="type"> Type Entite :</label>
+    
+          <select id="typ" nom="typeEntiteMereDTO"  
+              class="form-control" #typ (ngModel)="typ"    (change)="typeEntiteChange(typ.value)">
+              <option   *ngFor="let typ of typeEEntite"    [value]="typ.id">{{typ.nom}}</option>
+          </select>
+        </div>
+    
+    
+    
+    
+        <div class="form-group">
+          <label for="type"> Entite Mere :</label>
+    
+          <select id="type" nom="typeEntiteMereDTO"  
+              class="form-control" #type (ngModel)="type"    (change)="typeEntitChange(type.value)">
+            <div *ngIf="updateeTypeEntite.entiteMereDTO !==null">
+    
+              <option      [value]="updateeTypeEntite.entiteMereDTO.id">{{updateeTypeEntite.entiteMereDTO.nom}}</option>
+            </div>
+              <option   *ngFor="let type of typeenti"    [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+    
+        
+    
+        <div class="form-group">
+          <label for="nom">nom :</label>
+          <input type="text"
+          required
+            
+          minlength=2
+          maxlength=30
+          name="nom"
+          (keypress)="keyPressAlphabitique($event)"
+          #nom [(ngModel)]="updateeTypeEntite.nom"
+          id="nom"  autocomplete="off" class="form-control" placeholder="nom">
+        </div>
+        <div>
+          <div *ngIf = "nom.touched">
+            <div *ngIf="nom.errors?.required"> This field is required </div>
+            <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+    
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="code">code :</label>
+          <input type="text"   #code [(ngModel)]="updateeTypeEntite.code" name="code" id="code" class="form-control"
+            placeholder="code">
+        </div>
+    
+        <div class="form-group">
+          <label for="localit">Localite :</label>
+    
+          <select id="localit" nom="localit" 
+              class="form-control" #localit (ngModel)="localit"    (change)="localiteChange(localit.value)">
+            <option selected  *ngFor="let localit of localite"    [value]="localit.id">{{localit.nom}}</option>
+          </select>
+        </div>
+        
+        
+        <div class="form-group mt-3">
+          <input type="submit" value="Modifier" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+    </ng-template>
+    <!-- MODIFIER -->
+    
+    
+    
+    
+    
+    
+    <div class="container">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2> <b>Menu</b></h2>
+            </div>
+            <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+    
+            <div class="col-sm-6">
+    
+              <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Menu</span></a>
+            </div>
+            </div>
+            <div *ngIf="role === 'ADMIN' ">
+    
+              <div class="col-sm-6">
+    
+                <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Menu</span></a>
+              </div>
+              </div>
+          </div>
+        </div>
+        <table class="table table-striped table-hover">
+          
+          <thead>
+    
+            <tr>
+              <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+    
+                <th>
+                  <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                    societe
+                  </span>  </th>
+    
+              </div>
+    
+              <th>
+                <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                  Menu Pere
+                </span>  </th>
+              <th>
+                  <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
+                    Application
+                  </span>   </th>
+              <th>
+                
+                <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                  Type
+                </span>   </th>
+              
+              <th>
+                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                  Nom 
+                </span>  </th>
+              <th>
+                
+                <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                  Description
+                </span>  </th>
+                <th>
+                
+                <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                  Lien
+                </span>  </th>
+                <th>
+                
+               <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                  Parametre
+                </span>  </th>
+                <th>
+                
+                <span value="code" style="cursor: pointer;" (click) = "trier($event)">
+                  Ordre
+                 </span>  </th>
+              <th>
+                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                  Cree Par
+                </span>  </th>
+                <th>
+                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                  Cree Le
+                </span></th>
+              <th>
+                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                  Modifier Par
+                </span>  </th>
+              <th>
+                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
+                  Modifier Le
+                </span> </th>
+              <div *ngIf="role === 'ADMIN' ">
+    
+                <th>Actions</th>>
+              </div>
+              <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+    
+                <th>Actions</th>
+                </div>
+            </tr>
+    
+          </thead>
+    
+          <tbody>
+    
+            <tr *ngFor="let menu of societeChoisie | paginate: { itemsPerPage: 4, currentPage: page, totalItems:totalLenght }">
+              <div *ngIf="role === 'MODERATEUR' && societecnct===null">
+                <td>{{menu.applicationDTO.societeDTO.nom}}</td>
+              </div>
+              <div *ngIf="menu.menuPereDTO === null"><td></td> </div>
+                <div *ngIf="menu.menuPereDTO !== null"><td>{{menu.menuPereDTO.nom}}</td></div>
+              <td>{{menu.applicationDTO.nom}}</td>
+                <td>{{menu.type}}</td>
+                <td>{{menu.nom}}</td>
+                
+                <td>{{menu.description}}</td>
+                <td>{{menu.lien}}</td>
+                <td>{{menu.parametres}}</td>
+                <td>{{menu.ordre}}</td>
+    
+                <td>{{menu.createdBy }}</td>
+                <td>{{menu.createdDate | date:'mediumDate'}}</td>
+                <td>{{menu.lastModifiedBy }}</td>
+                <td>{{menu.lastModifedDate| date:'mediumDate'}}</td>
+                
+    
+                
+                <!-- <td>{{societe.nomAbrege}}</td>
+                <td>{{societe.statut}}</td> -->
+                <div *ngIf="role === 'ADMIN' ">
+                  <td>
+                    <a (click)="modifier(contentt, menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    <a (click)="deleteEntite(menu)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                  </td></div>
+    
+              <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+                <td>
+                  <a (click)="modifier(contentt, menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                  <a (click)="deleteEntite(menu)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                </td></div>
+              </tr>
+    
+            
+            
+            
+          </tbody>
+        </table>
+        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+    
+      </div>
+    </div>

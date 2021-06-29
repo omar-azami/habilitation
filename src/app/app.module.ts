@@ -24,7 +24,7 @@ import { LocaliteComponent } from './localite/localite.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ApplicationComponent } from './application/application.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
-
+import { MenuComponent } from './menu/menu.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PartailsComponent } from './partails/partails.component';
 
@@ -45,6 +45,8 @@ import { PartailsComponent } from './partails/partails.component';
     ApplicationComponent,
     UtilisateurComponent,
     PartailsComponent,
+    MenuComponent,
+
     
   ],
   imports: [

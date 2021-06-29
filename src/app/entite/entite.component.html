@@ -321,7 +321,7 @@
             <td>{{societe.statut}}</td> -->
             <div *ngIf="role === 'ADMIN' ">
               <td>
-                <a (click)="modifier(entite, typeSociete)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a (click)="modifier(contentt, entite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a (click)="deleteEntite(entite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
               </td></div>
 

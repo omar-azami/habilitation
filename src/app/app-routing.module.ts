@@ -11,6 +11,7 @@ import { ApplicationComponent } from './application/application.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { PartailsComponent } from './partails/partails.component';
 import { AppComponent } from './app.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'utilisateur', component: UtilisateurComponent },
   { path: 'partails', component: PartailsComponent },
   { path: 'app', component: AppComponent },
+  { path: 'menu', component: MenuComponent },
 
 ];
 

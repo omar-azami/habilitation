@@ -55,6 +55,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.totalLenght=this.listSociete.length;
+     if(this.localUser.data.roles[0]==="ADMIN"){
+          this.router.navigate(['/typeentite'])
+
+        }
+     
     this.updateSubscription = interval(100).subscribe(
       (val) => {       
         this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
@@ -127,13 +132,39 @@ export class HomeComponent implements OnInit {
 this.type=societe.typeSocieteDTO.id;
   console.log("liiiiste type societe    :   ",this.listTypeSociete)
   }
+
   
+  selectedFile:File;
+   onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
+    
+  
+
+  }
   
 
   register(registerForm: NgForm){
-    registerForm.value.typeSocieteDTO=this.typeSociete
+    if(this.selectedFile==null){
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'on trouve pas aucun image',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return 0;
+    }
+    const uploadImageData = new FormData();
 
-    this.societe.registerSocite(registerForm.value, this.localUser.data.token).subscribe(data => {
+    uploadImageData.append('imageFile', this.selectedFile);
+    registerForm.value.typeSocieteDTO=this.typeSociete
+    uploadImageData.append('societeDTO', JSON.stringify(registerForm.value));
+
+    console.log(uploadImageData,registerForm.value);
+    // this.societe.registerSocitei(uploadImageData, this.localUser.data.token).subscribe()
+    this.societe.registerSocite(uploadImageData, this.localUser.data.token).subscribe(data => {
       this.detaRegester=data;
       this.str1=this.detaRegester.statut;
        this.index = this.str1.localeCompare( "SUCCESS");  

@@ -5,6 +5,8 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TypesocieteService } from './typesociete.service';
 import Swal from 'sweetalert2'
 import { Subscription } from 'rxjs/internal/Subscription';
+import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +32,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private typesociete: TypesocieteService,
-    
+    private router: Router,
+
 
     ) { }
 
@@ -38,6 +41,21 @@ export class DashboardComponent implements OnInit {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.getTypeSociet();
     this.totalLenght=this.listTypeSociete.length
+    if(this.localUser.data.roles[0]==="ADMIN"){
+      this.router.navigate(['/typeentite'])
+
+    }
+    this.updateSubscription = interval(100).subscribe(
+      (val) => {       
+        this.localUser = JSON.parse(localStorage.getItem('userData'));
+        if(this.localUser==null){
+          this.router.navigate(['/login'])
+
+        }
+     
+
+
+         });
     
     
   }
@@ -134,7 +152,11 @@ export class DashboardComponent implements OnInit {
           if (result.isConfirmed) {
             console.log(typeSociete);
         this.typesociete.deleteTypeSociete(typeSociete.id, this.localUser.data.token)
-                         .subscribe();
+                         .subscribe(data=>
+                          this.getTypeSociet()
+
+                         );
+//
             Swal.fire(
               'Supprimé!',
               'Le Type Societ a été supprimé.',

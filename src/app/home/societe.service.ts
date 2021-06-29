@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Societe } from './societe';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,19 @@ export class SocieteService {
   constructor(private http: HttpClient) { }
 
   API = 'http://localhost:1111';
-
-  public registerSocite(SociteData: any, token : String) {
+  public registerSocite(SociteData: any,token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.post(this.API + '/admin/add/societesa', SociteData, httpOptions);
+    console.log("SociteData :", SociteData)
+    return this.http.post(this.API + '/admin/add/societesa',SociteData ,httpOptions);        
+
+  }
+
+  public registerSocitei( uploadImageData:any ,token : String){
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
+    const httpOptions = { headers: headers_object  }   
+    console.log("uploadImageData :", uploadImageData)
+    return  this.http.post(this.API + '/admin/add/societesa',uploadImageData ,httpOptions);        
   }
 
   public getSociet(nom: String, token : String) {

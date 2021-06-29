@@ -167,7 +167,7 @@ str1:string;
 
     var inp = String.fromCharCode(event.keyCode);
 
-    if (/[a-zA-Z]/.test(inp)) {
+    if (/[a-z A-Z]/.test(inp)) {
       return true;
     } else {
       event.preventDefault();
@@ -300,6 +300,8 @@ str1:string;
                           console.log('data -->',this.str)
                         
                       this.index = this.str.localeCompare( "SUCCESS");  
+                      this.getAllProfil();
+
 
                       console.log("index  : ",this.index)
 
@@ -308,7 +310,9 @@ str1:string;
               'Modifier!',
               'Le profil est modifier.',
               'success'
-            )}
+            )
+            this.getAllProfil();
+          }
             else{
               Swal.fire(
               'Modifier!',

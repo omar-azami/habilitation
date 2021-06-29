@@ -107,8 +107,14 @@ export class LocaliteComponent implements OnInit {
       this.localiteService.getLocalite(this.localUser.data.token)
                          .subscribe(data => {this.Localite = data;
                           this.listLocalite=this.Localite.collection
-                          })
+                          for (let order of this.listLocalite) {
+
+                            if (order.nom.includes("ADMIN")) {
+                                this.listLocalite.splice(this.listLocalite.indexOf(order), 1);
+                                 }
                           
+                          }
+                         })
                           
     }
       keyPressAlphabitique(event) {
