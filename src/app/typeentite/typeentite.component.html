@@ -35,7 +35,7 @@
 
 
       <div class="form-group">
-        <label for="type">Type :</label>
+        <label for="type">Type Entite Mere :</label>
 
         <select id="type" nom="type" 
             class="form-control" #type (ngModel)="type"    (change)="typeSocieteChange(type.value)">
@@ -165,23 +165,23 @@
 <div class="container">
   <div class="table-wrapper">
     <div class="table-title">
-      <div class="row">
+      <div class="row pt-2">
         <div class="col-sm-6">
-          <h2> <b>Type Entite</b></h2>
-        </div>
-        <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+          <h2> <b>  Type Entite</b></h2>
 
-        <div class="col-sm-6">
+        </div>
+        
+
+        <div *ngIf="role === 'MODERATEUR' && societecnct!==null" class="col-sm-6">
+
 
           <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
         </div>
-        </div>
-        <div *ngIf="role === 'ADMIN' ">
 
-          <div class="col-sm-6">
+        <div *ngIf="role === 'ADMIN'  " class="col-sm-6">
+
 
             <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
-          </div>
           </div>
       </div>
     </div>
@@ -189,14 +189,13 @@
 
         <thead>
           <tr>
-            <div *ngIf="role === 'MODERATEUR' && societecnct===null">
 
-              <th>
+              <th *ngIf="role === 'MODERATEUR' && societecnct===null">
                 <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
                   Societe
                 </span>    </th>
 
-            </div>
+            
             <th>
                 <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
                   Nom
@@ -226,16 +225,14 @@
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
                 Modifier Le
               </span>   </th>
-            <div *ngIf="role === 'ADMIN' ">
 
-              <th>Actions</th>
+              <th *ngIf="role === 'ADMIN' ">Actions</th>
 
-            </div>
-            <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+            
 
-              <th>Actions</th>
+              <th *ngIf="role === 'MODERATEUR' && societecnct!==null">Actions</th>
 
-              </div>
+              
           </tr>
         </thead>
 
@@ -244,32 +241,26 @@
       <tbody>
 
        <tr *ngFor="let typeEntite of societeChoisie | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
-            <div *ngIf="role === 'MODERATEUR' && societecnct===null">
-              <td>{{typeEntite.societeDTO.nom}}</td>
-
-            </div>
-
+              <td *ngIf="role === 'MODERATEUR' && societecnct===null">{{typeEntite.societeDTO.nom}}</td>
               <td>{{typeEntite.nom}}</td>
               <td>{{typeEntite.code}}</td>
-              <div *ngIf="typeEntite.typeEntiteMereDTO == null"><td></td></div>
-              <div *ngIf="typeEntite.typeEntiteMereDTO != null"><td>{{typeEntite.typeEntiteMereDTO.nom}}</td></div>
+              <td *ngIf="typeEntite.typeEntiteMereDTO == null"></td>
+              <td *ngIf="typeEntite.typeEntiteMereDTO != null">{{typeEntite.typeEntiteMereDTO.nom}}</td>
               <td>{{typeEntite.createdBy}}</td>
               <td>{{typeEntite.createdDate | date:'mediumDate'}}</td>
               <td>{{typeEntite.lastModifiedBy}}</td>
               <td>{{typeEntite.lastModifedDate | date:'mediumDate'}}</td>
               
 
-              <div *ngIf="role === 'ADMIN' ">
-                <td>
+                <td *ngIf="role === 'ADMIN' ">
                   <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                   <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                </td></div>
+                </td>
 
-            <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-              <td>
+              <td *ngIf="role === 'MODERATEUR' && societecnct!==null">
                 <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td></div>
+              </td>
             </tr>
         
         

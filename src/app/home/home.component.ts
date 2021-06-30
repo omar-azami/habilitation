@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { TypesocieteService } from '../dashboard/typesociete.service';
 import { BehaviorSubject, interval } from 'rxjs';
 import { Router } from '@angular/router';
+import { LocaliteService } from '../localite/localite.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
     private societe: SocieteService,
     private typesociete: TypesocieteService,
     private router: Router,
+     private localiteService: LocaliteService
 
   ) { }
 
@@ -75,7 +77,7 @@ export class HomeComponent implements OnInit {
 
     this.getSociete();
     this.getTypeSociet();
-
+    this.getLocalite();
   }
   trier(event){
 
@@ -91,7 +93,7 @@ export class HomeComponent implements OnInit {
 
     var inp = String.fromCharCode(event.keyCode);
 
-    if (/[a-zA-Z ]/.test(inp)) {
+    if (/[a-z A-Z ]/.test(inp)) {
       return true;
     } else {
       event.preventDefault();
@@ -134,37 +136,18 @@ this.type=societe.typeSocieteDTO.id;
   }
 
   
-  selectedFile:File;
-   onFileChanged(event) {
-    //Select File
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
-    
   
-
-  }
-  
-
+  registerFormm:any
+  localitte:any;
   register(registerForm: NgForm){
-    if(this.selectedFile==null){
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'on trouve pas aucun image',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      return 0;
-    }
-    const uploadImageData = new FormData();
+    this.localitte=registerForm.value.statut
 
-    uploadImageData.append('imageFile', this.selectedFile);
     registerForm.value.typeSocieteDTO=this.typeSociete
-    uploadImageData.append('societeDTO', JSON.stringify(registerForm.value));
-
-    console.log(uploadImageData,registerForm.value);
+    registerForm.value.statut="active"
+    console.log("uploadImageData",registerForm.value);
+    console.log("    listLocalite ",this.listLocalite);
     // this.societe.registerSocitei(uploadImageData, this.localUser.data.token).subscribe()
-    this.societe.registerSocite(uploadImageData, this.localUser.data.token).subscribe(data => {
+    this.societe.registerSocite(registerForm.value,this.localitte, this.localUser.data.token).subscribe(data => {
       this.detaRegester=data;
       this.str1=this.detaRegester.statut;
        this.index = this.str1.localeCompare( "SUCCESS");  
@@ -286,6 +269,18 @@ this.type=societe.typeSocieteDTO.id;
     
       }
 
+
+
+      listLocalite:any;
+      getLocalite() {
+        this.localiteService.getLocalite(this.localUser.data.token)
+                           .subscribe(data => {this.listLocalite = data;
+                            this.listLocalite=this.listLocalite.collection
+            
+                            
+                           })
+                            
+      }
       detail(societe){
         this.societeAd=societe.id;
         console.log("societeAd:  ",this.societeAd)

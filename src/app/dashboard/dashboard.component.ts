@@ -98,6 +98,7 @@ export class DashboardComponent implements OnInit {
   }
 
   register(registerForm: NgForm){
+    registerForm.value.statut="active"
     this.typesociete.registerTypeSocite(registerForm.value, this.localUser.data.token).subscribe(data => {
       
       console.log("ttttttt",data)

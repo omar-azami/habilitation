@@ -68,17 +68,24 @@
 
         </div>
       </div>
-      <div class="form-group">
-        <label for="img">Image :</label>
+      <label for="nomAbrege">Localite :</label>
+      
+      <input   type="text" #statut (ngModel)="statut" name="statut" id="statut" autocomplete="off" class="form-control"
+      placeholder="localite" list="cars" />
+<datalist id="cars">
+  <option   *ngFor="let type of listLocalite "    [value]="type.nom">{{type.nom}}</option>
+  
+</datalist>
 
-        <input type="file" name="File" (change)="onFileChanged($event)">
 
-    </div>
-      <div class="form-group">
-        <label for="statut">Statut :</label>
-        <input type="text" #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
-          placeholder="statut">
-      </div>
+
+
+
+
+
+
+
+      
 
 
       <div class="form-group mt-3">
@@ -251,7 +258,8 @@
         <td>{{societe.nom}}</td>
         <td>{{societe.code}}</td>
         <td>{{societe.nomAbrege}}</td>
-        <td>{{societe.statut}}</td>
+        <td *ngIf="societe.statut === 'active' "><span class="dot"></span></td>
+        <td *ngIf="societe.statut === 'deactive' "><span class="red"></span></td>
         <td>{{societe.createdBy}}</td>
         <td>{{societe.createdDate  | date:'mediumDate'}}</td>
         <td>{{societe.lastModifiedBy}}</td>

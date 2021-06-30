@@ -24,7 +24,7 @@ export class MenuService {
   public getEntiteById(id:number, token : String) {//88
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.get(this.API + '/show/menuById/id/'+id , httpOptions);
+    return this.http.get(this.API + '/admin/show/menuById/id/'+id , httpOptions);
     
   }
   public registerEntite(typeEntite: any, token : String) {//88

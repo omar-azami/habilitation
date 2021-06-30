@@ -58,7 +58,7 @@
       </div>
       <div class="form-group">
         <label for="statut">Statut :</label>
-        <input type="text" #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
+        <input type="hidden" #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
           placeholder="statut">
       </div>
       <div class="form-group mt-3">
@@ -148,10 +148,10 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Type <b>Societe</b></h2>
+          <h2><b>Type Societe</b></h2>
         </div>
         <div class="col-sm-6">
-          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter Nouveau Type Societe</span></a>
         </div>
       </div>
     </div>
@@ -210,7 +210,9 @@
           <td>{{typeSociete.nom}}</td>
           <td>{{typeSociete.code}}</td>
           <td>{{typeSociete.nomAbrege}}</td>
-          <td>{{typeSociete.statut}}</td>
+          <td *ngIf="typeSociete.statut === 'active' "><span class="dot"></span></td>
+          <td *ngIf="typeSociete.statut === 'deactive' "><span class="red"></span></td>
+
           <td>{{typeSociete.createdBy}}</td>
           <td>{{typeSociete.createdDate  | date:'mediumDate'}}</td>
           <td>{{typeSociete.lastModifiedBy}}</td>

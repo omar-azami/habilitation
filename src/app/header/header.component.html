@@ -3,19 +3,44 @@
     <button mat-icon-button (click)="toggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
+
+    
+
+    <div class="col-sm-4">
+      <div *ngIf="role === 'MODERATEUR' ">
+
+        <form #serachForm="ngForm" (ngSubmit)="serachEntite(serachForm)" class="search-bar">
+          <input type="search"  #search (ngModel)="search" name="search" pattern=".\S." required>
+          <button class="search-btn" type="submit">
+            <span>Search</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+
     <div class="row mr-2 ml-auto">
       <ul class="row m-0 align-items-center">
         <li>
-          <button
-            mat-button
-            [matMenuTriggerFor]="menu"
-            class="user mt-2 d-flex align-items-center"
-          >
+          <button mat-button   [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center"  >
+          
             <img src="./assets/user.jpg" alt="" class="user-image mr-1 p-2" />
 
-            {{role}}
-            <mat-icon class="user-image-icon ml-1" 
-              >keyboard_arrow_down</mat-icon >
+            <div *ngIf="role === 'MODERATEUR' ">
+              {{role}}
+              <div *ngIf="admicnct !== null ">
+                {{admicnct.nom}}
+              </div>
+            </div>
+            <div *ngIf="role === 'ADMIN' ">
+              {{role}}<br>
+              {{localUser.data.entite }}<br>
+              {{localUser.data.societe}}<br>
+            </div>
+
+
+            <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon >
           </button>
           <mat-menu #menu="matMenu">
             <button type="button" (click)="open()" mat-menu-item >

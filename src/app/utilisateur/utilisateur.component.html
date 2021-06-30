@@ -256,19 +256,12 @@
         <div class="col-sm-6">
           <h2> <b>Utilisateur</b></h2>
         </div>
-        <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-
-        <div class="col-sm-6">
-
+        <div *ngIf="role === 'MODERATEUR' && societecnct!==null" class="col-sm-6">
           <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Utilisateur</span></a>
         </div>
-        </div>
-        <div *ngIf="role === 'ADMIN' ">
-
-          <div class="col-sm-6">
-
+        
+        <div *ngIf="role === 'ADMIN' " class="col-sm-6">
             <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Utilisateur</span></a>
-          </div>
           </div>
       </div>
     </div>
@@ -278,14 +271,12 @@
          
         <tr>
 
-            <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">
 
-              <th>
+              <th *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">
                 <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
                   Societe
                 </span> </th>
 
-            </div>
 
 
 
@@ -329,16 +320,11 @@
             <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
               Modifie Le
             </span></th>
-          <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
-            <th>Actions</th> 
+            <th *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">Actions</th> 
 
-          </div>
 
-          <div *ngIf="localUser.data.roles[0] === 'ADMIN'">
+            <th *ngIf="localUser.data.roles[0] === 'ADMIN'">Actions</th>
 
-            <th>Actions</th>
-
-            </div>
         </tr>
         </thead>
 
@@ -347,10 +333,10 @@
       <tbody>
      
             <tr *ngFor="let utilisateur of listUtilisateur | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
-              <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">
-                <td>{{utilisateur.societeDTO.nom}}</td>
+              
+                <td *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">{{utilisateur.societeDTO.nom}}</td>
 
-              </div>
+              
               <td>{{utilisateur.entiteDTO.nom}}</td>
 
                 <td>{{utilisateur.nom}}</td>
@@ -363,18 +349,16 @@
                 <td>{{utilisateur.lastModifedDate}}</td>
                 <td>{{utilisateur.lastModifiedBy | date:'mediumDate'}}</td>
 
-                <div *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
 
-                  <td>
+                  <td *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">
                     <a (click)="modifier(contentt, utilisateur)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                     <a (click)="deleteUtilisateur(utilisateur)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                  </td></div>
-               <div *ngIf="localUser.data.roles[0] === 'ADMIN' ">
+                  </td>
 
-                <td>
+                <td *ngIf="localUser.data.roles[0] === 'ADMIN' ">
                   <a (click)="modifier(contentt, utilisateur)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                   <a (click)="deleteUtilisateur(utilisateur)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                </td></div>
+                </td>
             </tr>
         
       </tbody>

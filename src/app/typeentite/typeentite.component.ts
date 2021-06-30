@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { interval, Subscription } from 'rxjs';
+import { mergeMapTo } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { SocieteService } from '../home/societe.service';
 import { TypeentiteService } from './typeentite.service';
@@ -269,6 +270,35 @@ str1:string;
 
        })
        console.log("aaaaaa2",this.societ) ;
+
+    }
+
+    socie:any;
+    serachEntite(serachForm){
+      console.log("serachForm",serachForm.value.search)
+      if(serachForm.value.search!==null){
+      this.societe.getSocietParNom(serachForm.value.search ,this.localUser.data.token)
+      .subscribe(data => {this.socie = data;
+       this.socie=this.socie.data;
+       console.log("serachForm",this.socie.data)
+       localStorage.setItem('admicnct', JSON.stringify(this.socie))
+        this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
+        if(this.societecnct.id=null){
+          localStorage.removeItem('admicnct');
+
+        }
+       window.location.reload();
+
+      
+
+       })
+      }else{
+        console.log("serachFormm",serachForm.value.search)
+
+        localStorage.removeItem('admicnct');
+        window.location.reload();
+
+       }
 
     }
     boucletypeMere:any;

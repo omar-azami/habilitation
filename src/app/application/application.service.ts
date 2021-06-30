@@ -34,7 +34,7 @@ export class ApplicationService {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }
   
-    return this.http.get(this.API + '/show/application/BYID/'+id,httpOptions);
+    return this.http.get(this.API + '/admin/show/application/BYID/'+id,httpOptions);
   }
   
   public deleteProfil(id: number, societe:number,token : String) {

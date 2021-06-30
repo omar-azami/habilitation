@@ -215,20 +215,15 @@
         <div class="col-sm-6">
           <h2> <b>Entite</b></h2>
         </div>
-        <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-
-        <div class="col-sm-6">
-
+        
+        <div *ngIf="role === 'MODERATEUR' && societecnct!==null" class="col-sm-6">
           <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Entite</span></a>
         </div>
-        </div>
-        <div *ngIf="role === 'ADMIN' ">
 
-          <div class="col-sm-6">
-
+        <div *ngIf="role === 'ADMIN' " class="col-sm-6">
             <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Entite</span></a>
-          </div>
-          </div>
+        </div>
+
       </div>
     </div>
     <table class="table table-striped table-hover">
@@ -236,14 +231,12 @@
       <thead>
 
         <tr>
-          <div *ngIf="role === 'MODERATEUR' && societecnct===null">
 
-            <th>
+            <th *ngIf="role === 'MODERATEUR' && societecnct===null">
               <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
                 societe
               </span>  </th>
 
-          </div>
 
           <th>
             <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
@@ -284,14 +277,12 @@
             <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
               Modifier Le
             </span> </th>
-          <div *ngIf="role === 'ADMIN' ">
 
-            <th>Actions</th>>
-          </div>
-          <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
+            <th *ngIf="role === 'ADMIN' ">Actions</th>
+          
 
-            <th>Actions</th>
-            </div>
+            <th *ngIf="role === 'MODERATEUR' && societecnct!==null">Actions</th>
+           
         </tr>
 
       </thead>
@@ -299,17 +290,14 @@
       <tbody>
 
         <tr *ngFor="let entite of societeChoisie | paginate: { itemsPerPage: 4, currentPage: page, totalItems:totalLenght }">
-          <div *ngIf="role === 'MODERATEUR' && societecnct===null">
-            <td>{{entite.societeDTO.nom}}</td>
-
-          </div>
-          <td>{{entite.typeEntiteDTO.nom}}</td>
+          
+            <td *ngIf="role === 'MODERATEUR' && societecnct===null">{{entite.societeDTO.nom}}</td>
+            <td>{{entite.typeEntiteDTO.nom}}</td>
             <td>{{entite.nom}}</td>
             <td>{{entite.code}}</td>
-            <div *ngIf="entite.entiteMereDTO === null"><td></td> </div>
-            <div *ngIf="entite.entiteMereDTO !== null"><td>{{entite.entiteMereDTO.nom}}</td></div>
+            <td *ngIf="entite.entiteMereDTO === null"></td> 
+            <td *ngIf="entite.entiteMereDTO !== null">{{entite.entiteMereDTO.nom}}</td>
             <td>{{entite.localiteDTO.nom}}</td>
-
             <td>{{entite.createdBy }}</td>
             <td>{{entite.createdDate | date:'mediumDate'}}</td>
             <td>{{entite.lastModifiedBy }}</td>
@@ -319,17 +307,16 @@
             
             <!-- <td>{{societe.nomAbrege}}</td>
             <td>{{societe.statut}}</td> -->
-            <div *ngIf="role === 'ADMIN' ">
-              <td>
+            
+              <td *ngIf="role === 'ADMIN' ">
                 <a (click)="modifier(contentt, entite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a (click)="deleteEntite(entite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td></div>
+              </td>
 
-          <div *ngIf="role === 'MODERATEUR' && societecnct!==null">
-            <td>
+            <td *ngIf="role === 'MODERATEUR' && societecnct!==null">
               <a (click)="modifier(contentt, entite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
               <a (click)="deleteEntite(entite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-            </td></div>
+            </td>
           </tr>
 
         

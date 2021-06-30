@@ -253,18 +253,39 @@ gettypeEEntite(){
   }
 
 
-
-
+type:any;
+  geType(type){
+    this.type=type
+    console.log(type)
+  }
+  rad:any
+  radio(value){
+    console.log("value",value)
+    this.rad=value
+  }
+  
   register(registerForm: NgForm){
+
+
+
 
     this.localUser = JSON.parse(localStorage.getItem('userData'));
 
     this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
     this.role=this.localUser.data.roles[0]
-    registerForm.value.entiteMereDTO=this.entiteMereChoisie
-    registerForm.value.typeEntiteDTO=this.typeEntiteAJoute
+    registerForm.value.menuPereDTO=this.entiteMereChoisie
+    registerForm.value.type=this.type
+    registerForm.value.applicationDTO=this.typeEntiteAJoute
+    // registerForm.value.type=this.typeEntiteAJoute
+
     
     console.log("societechoiParAdmin :",registerForm.value)
+    // registerForm.value.applicationDTO ==undefined 
+    // registerForm.value.menuPereDTO== undefined ||
+    
+
+
+
 
     if(this.role==="ADMIN")
     {      this.societeAct=this.localUser.data.societee 
@@ -274,6 +295,29 @@ gettypeEEntite(){
     {    this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
     registerForm.value.societeDTO=this.societecnct
   }
+
+  if((
+    registerForm.value.description== null||
+    registerForm.value.lien== null ||
+    
+    registerForm.value.nom== "" ||
+    registerForm.value.ordre== null ||
+    registerForm.value.parametres== null ||
+    registerForm.value.type== undefined)||(registerForm.value.applicationDTO ==undefined 
+      && registerForm.value.menuPereDTO== undefined )){
+      
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Vous avez oublié un champs',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return 0
+    }
+    if(registerForm.value.applicationDTO ==undefined ){
+      registerForm.value.applicationDTO ==registerForm.value.menuPereDTO.applicationDTO
+    }
       console.log("registerFormmm: ",registerForm.value)
       this.entiteService.registerEntite(registerForm.value, this.localUser.data.token).subscribe(data => {
         this.detaRegester=data;
@@ -307,6 +351,7 @@ gettypeEEntite(){
              this.entiteService.getEntiteById(type,this.localUser.data.token)
              .subscribe(data => {this.entiteMereChoisie = data;
               this.entiteMereChoisie=this.entiteMereChoisie.data;
+              console.log("menuPereDTO",this.entiteMereChoisie)
 
               })
 
