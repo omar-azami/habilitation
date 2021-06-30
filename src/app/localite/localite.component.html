@@ -3,7 +3,7 @@
 <!-- AJOUTER -->
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic">Nouveau localite</h4>
+    <h4 class="modal-title" id="modal-basic">Nouvelle Localité</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -11,7 +11,7 @@
   <div class="modal-body">
     <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
 
@@ -26,8 +26,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères      </div>
 
         </div>
       </div>
@@ -37,32 +37,22 @@
           placeholder="code">
       </div>
 
-      <div>
-        <div *ngIf = "code.touched">
-          <div *ngIf="code.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+     
 
       <div class="form-group">
-        <label for="nomAbrege">Nom Abrege :</label>
+        <label for="nomAbrege">Nom Abrégé :</label>
         <input type="text" #nomAbrege (ngModel)="nomAbrege" name="nomAbrege" id="nomAbrege" class="form-control"
           placeholder="nomAbrege">
       </div>
-      <div>
-        <div *ngIf = "nomAbrege.touched">
-          <div *ngIf="nomAbrege.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+    
       
       <div class="form-group mt-3">
-        <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        <input type="submit" value="Ajouter" class="btn btn-primary w-100" (click)="modal.close('Save click')">
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- AJOUTER -->
@@ -80,7 +70,7 @@
 
 
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
           
@@ -93,8 +83,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères    </div>
 
         </div>
       </div>
@@ -104,24 +94,14 @@
           placeholder="code">
       </div>
 
-      <div>
-        <div *ngIf = "code.touched">
-          <div *ngIf="code.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+      
 
       <div class="form-group">
-        <label for="nomAbrege">Nom Abrege :</label>
+        <label for="nomAbrege">Nom Abrégé :</label>
         <input type="text" #nomAbrege [(ngModel)]="updateLocalite.nomAbrege" name="nomAbrege" id="nomAbrege" class="form-control"
           placeholder="nomAbrege">
       </div>
-      <div>
-        <div *ngIf = "nomAbrege.touched">
-          <div *ngIf="nomAbrege.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+     
       
       
       <div class="form-group mt-3">
@@ -130,7 +110,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- MODIFIER -->
@@ -142,10 +122,10 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2> <b>Localite</b></h2>
+          <h2> <b>Localité</b></h2>
         </div>
         <div class="col-sm-6">
-          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Localite</span></a>
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouvelle Localité</span></a>
         </div>
       </div>
     </div>
@@ -166,7 +146,7 @@
             </span> </th>
           <th>
             <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
-              Nom Abrege
+              Nom Abrégé
             </span>   </th>
          
          
@@ -180,8 +160,8 @@
           <td>{{localite.code}}</td>
           <td>{{localite.nomAbrege}}</td>
           <td>
-            <a (click)="modifier(contentt, localite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a (click)="deleteLocalite(localite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            <a (click)="modifier(contentt, localite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE254;</i></a>
+            <a (click)="deleteLocalite(localite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE872;</i></a>
           </td>
         </tr>
         

@@ -4,7 +4,7 @@
 <!-- AJOUTER -->
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic">Nouveau Societe</h4>
+    <h4 class="modal-title" id="modal-basic">Nouvelle Société</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -39,8 +39,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -50,24 +50,13 @@
           placeholder="code">
       </div>
 
-      <div>
-        <div *ngIf = "code.touched">
-          <div *ngIf="code.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
 
       <div class="form-group">
-        <label for="nomAbrege">Nom Abrege :</label>
+        <label for="nomAbrege">Nom Abrégé :</label>
         <input type="text" #nomAbrege (ngModel)="nomAbrege" name="nomAbrege" id="nomAbrege" class="form-control"
           placeholder="nomAbrege">
       </div>
-      <div>
-        <div *ngIf = "nomAbrege.touched">
-          <div *ngIf="nomAbrege.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+      
       <label for="nomAbrege">Localite :</label>
       
       <input   type="text" #statut (ngModel)="statut" name="statut" id="statut" autocomplete="off" class="form-control"
@@ -89,13 +78,13 @@
 
 
       <div class="form-group mt-3">
-        <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        <input type="submit" value="Ajouter" class="btn btn-primary w-100" (click)="modal.close('Save click')">
       </div>
       
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- AJOUTER -->
@@ -103,7 +92,7 @@
 <!-- MODIFIER -->
 <ng-template #contentt let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic">Modifier  Societe</h4>
+    <h4 class="modal-title" id="modal-basic">Modifier Société</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -129,7 +118,7 @@
       </div>
 
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
           
@@ -142,8 +131,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis   </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -153,24 +142,14 @@
           placeholder="code">
       </div>
 
-      <div>
-        <div *ngIf = "code.touched">
-          <div *ngIf="code.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+     
 
       <div class="form-group">
-        <label for="nomAbrege">Nom Abrege :</label>
+        <label for="nomAbrege">Nom Abrégé :</label>
         <input type="text" #nomAbrege [(ngModel)]="updateeSociete.nomAbrege" name="nomAbrege" id="nomAbrege" class="form-control"
           placeholder="nomAbrege">
       </div>
-      <div>
-        <div *ngIf = "nomAbrege.touched">
-          <div *ngIf="nomAbrege.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
+      
       <div class="form-group">
         <label for="statut">Statut :</label>
         <input type="text" #statut [(ngModel)]="updateeSociete.statut" name="statut" id="statut" class="form-control"
@@ -183,7 +162,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- MODIFIER -->
@@ -196,10 +175,10 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2> <b>Societe</b></h2>
+          <h2> <b>Société</b></h2>
         </div>
         <div class="col-sm-6">
-          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Societe</span></a>
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouvelle Société</span></a>
         </div>
       </div>
     </div>
@@ -222,26 +201,26 @@
             </span>  </th>
           <th>
             <span value="nomAbrege" style="cursor: pointer;" (click) = "trier($event)">
-              Nom Abrege
+              Nom Abrégé
             </span>   </th>
           <th>
             <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
               statut
             </span>  <th>
             <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
-              Cree Par
+              Créé Par
             </span> </th>
             <th>
             <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
-              Cree Le
+              Créé Le
             </span>  </th> 
           <th>
             <span value="created_by " style="cursor: pointer;" (click) = "trier($event)">
-              Modifier Par
+              Modifié Par
             </span> </th>
           <th>
             <span value="created_date" style="cursor: pointer;" (click) = "trier($event)">
-              Modifier Le
+              Modifié Le
             </span> </th>
           
           <th>Actions</th>

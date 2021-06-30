@@ -320,7 +320,7 @@ this.type=societe.typeSocieteDTO.id;
            
             Swal.fire(
               'modifier!',
-              'Le Type Societe a été mis à jour.',
+              'La Societe a été modifié.',
               'success'
             )
             

@@ -101,7 +101,6 @@ export class DashboardComponent implements OnInit {
     registerForm.value.statut="active"
     this.typesociete.registerTypeSocite(registerForm.value, this.localUser.data.token).subscribe(data => {
       
-      console.log("ttttttt",data)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -195,7 +194,7 @@ export class DashboardComponent implements OnInit {
            
             Swal.fire(
               'modifier!',
-              'Le Type Societe a été mis à jour.',
+              'Le Type Societe a été modifié.',
               'success'
             )
             this.getTypeSociet();

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2'
@@ -164,7 +163,7 @@ export class ApplicationComponent implements OnInit {
   
       var inp = String.fromCharCode(event.keyCode);
   
-      if (/[a-zA-Z]/.test(inp)) {
+      if (/[a-z A-Z]/.test(inp)) {
         return true;
       } else {
         event.preventDefault();
@@ -303,13 +302,13 @@ export class ApplicationComponent implements OnInit {
         if(this.index==0){
               Swal.fire(
                 'Modifier!',
-                'Le profil est modifier.',
+                ' L application est modifié',
                 'success'
               )}
               else{
                 Swal.fire(
                 'Modifier!',
-                'Ce profil est deja enregestrer.',
+                'Cette application est deja enregestré.',
                 'error'
               )
   
@@ -369,13 +368,13 @@ export class ApplicationComponent implements OnInit {
       if(this.index==0){
             Swal.fire(
               'Supprimé!',
-              'Le profil a été supprimé.',
+              'L application a été supprimé.',
               'success'
             )}
             else{
               Swal.fire(
               'Supprimé!',
-              'vous peut pas supprimer , supprimer les champs reliés à le profil.',
+              'vous peut pas supprimer , supprimer les champs reliés à cette application.',
               'error'
             )
   

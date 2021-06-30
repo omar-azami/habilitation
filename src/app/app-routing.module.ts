@@ -12,6 +12,7 @@ import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { PartailsComponent } from './partails/partails.component';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
+import { AffectationprofilComponent } from './affectationprofil/affectationprofil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'partails', component: PartailsComponent },
   { path: 'app', component: AppComponent },
   { path: 'menu', component: MenuComponent },
+  { path: 'affectationprofil', component: AffectationprofilComponent },
 
 ];
 

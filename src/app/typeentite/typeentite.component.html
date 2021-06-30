@@ -5,7 +5,7 @@
 <!-- AJOUTER -->
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic">Nouveau Type Entite</h4>
+    <h4 class="modal-title" id="modal-basic">Nouveau Type Entité    </h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -24,7 +24,7 @@
 
 
           <div class="form-group">
-            <label for="type">societe :</label>
+            <label for="type">Société :</label>
     
             <select id="societe" nom="type" 
                 class="form-control" #societe (ngModel)="societe"    (change)="typeSocieteeChange(societe.value)">
@@ -35,7 +35,7 @@
 
 
       <div class="form-group">
-        <label for="type">Type Entite Mere :</label>
+        <label for="type">Type Entité Mère :</label>
 
         <select id="type" nom="type" 
             class="form-control" #type (ngModel)="type"    (change)="typeSocieteChange(type.value)">
@@ -43,7 +43,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
 
@@ -58,8 +58,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -72,12 +72,12 @@
       
       
       <div class="form-group mt-3">
-        <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        <input type="submit" value="Ajouter" class="btn btn-primary w-100" (click)="modal.close('Save click')">
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- AJOUTER -->
@@ -85,7 +85,7 @@
 <!-- MODIFIER -->
 <ng-template #contentt let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic">Modifier  Type Entite</h4>
+    <h4 class="modal-title" id="modal-basic">Modifier  Type Entité</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -101,7 +101,7 @@
       </div>
       
       <div class="form-group">
-        <label for="type">Type Entite Mere :</label>
+        <label for="type">Type Entité  Mère :</label>
 
         <select id="type" nom="typeEntiteMereDTO"  
             class="form-control" #type (ngModel)="type"    (change)="typeEntitChange(type.value)">
@@ -114,7 +114,7 @@
       </div>
 
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
           
@@ -127,8 +127,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -138,13 +138,7 @@
           placeholder="code">
       </div>
 
-      <div>
-        <div *ngIf = "code.touched">
-          <div *ngIf="code.errors?.required"> This field is required </div>
-
-        </div>
-      </div>
-
+      
       
      
       
@@ -154,7 +148,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- MODIFIER -->
@@ -167,7 +161,7 @@
     <div class="table-title">
       <div class="row pt-2">
         <div class="col-sm-6">
-          <h2> <b>  Type Entite</b></h2>
+          <h2> <b>  Type Entité</b></h2>
 
         </div>
         
@@ -175,13 +169,13 @@
         <div *ngIf="role === 'MODERATEUR' && societecnct!==null" class="col-sm-6">
 
 
-          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
+          <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entité</span></a>
         </div>
 
         <div *ngIf="role === 'ADMIN'  " class="col-sm-6">
 
 
-            <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entite</span></a>
+            <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Type Entité</span></a>
           </div>
       </div>
     </div>
@@ -192,7 +186,7 @@
 
               <th *ngIf="role === 'MODERATEUR' && societecnct===null">
                 <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                  Societe
+                  Société
                 </span>    </th>
 
             
@@ -208,22 +202,22 @@
            
             <th>
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                Type Mere
+                Type Mère
               </span>   </th>
             <th>
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                Cree Par
+                Créé Par
               </span>   </th><th>
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                Cree Le
+                Créé Le
               </span>   </th>
             <th>
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                Modifier Par
+                Modifié Par
               </span>   </th>
             <th>
               <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                Modifier Le
+                Modifié Le
               </span>   </th>
 
               <th *ngIf="role === 'ADMIN' ">Actions</th>
@@ -240,7 +234,7 @@
 
       <tbody>
 
-       <tr *ngFor="let typeEntite of societeChoisie | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
+       <tr *ngFor="let typeEntite of societeChoisie | paginate: { itemsPerPage: 10, currentPage: page, totalItems:totalLenght }">
               <td *ngIf="role === 'MODERATEUR' && societecnct===null">{{typeEntite.societeDTO.nom}}</td>
               <td>{{typeEntite.nom}}</td>
               <td>{{typeEntite.code}}</td>
@@ -253,13 +247,13 @@
               
 
                 <td *ngIf="role === 'ADMIN' ">
-                  <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                  <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                  <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE254;</i></a>
+                  <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE872;</i></a>
                 </td>
 
               <td *ngIf="role === 'MODERATEUR' && societecnct!==null">
-                <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                <a (click)="modifier(contentt, typeEntite)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE254;</i></a>
+                <a (click)="deleteTypeEntite(typeEntite)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE872;</i></a>
               </td>
             </tr>
         

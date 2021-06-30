@@ -402,7 +402,7 @@ if(this.array[k]!=null){
          
           Swal.fire(
             'modifier!',
-            'Le Type Societe a été mis à jour.',
+            'Le Type Entité a été mis à jour.',
             'success'
           )
           this.getAllsocieteEntite();
@@ -474,13 +474,13 @@ if(this.array[k]!=null){
     if(this.index==0){
           Swal.fire(
             'Supprimé!',
-            'La societe a été supprimé.',
+            'Le Type Entité a été supprimé.',
             'success'
           )}
           else{
             Swal.fire(
             'Supprimé!',
-            'vous peut pas supprimer , supprimer les champs reliés à la Type Entite.',
+            'vous peut pas type Entité , supprimer les champs reliés à le Type Entite.',
             'error'
           )
 

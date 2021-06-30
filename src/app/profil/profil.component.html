@@ -10,7 +10,7 @@
   <div class="modal-body">
     <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
 
@@ -25,8 +25,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -34,12 +34,12 @@
       
       
       <div class="form-group mt-3">
-        <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+        <input type="submit" value="Ajouter" class="btn btn-primary w-100" (click)="modal.close('Save click')">
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- AJOUTER -->
@@ -57,7 +57,7 @@
 
 
       <div class="form-group">
-        <label for="nom">nom :</label>
+        <label for="nom">Nom :</label>
         <input type="text"
         required
           
@@ -70,8 +70,8 @@
       </div>
       <div>
         <div *ngIf = "nom.touched">
-          <div *ngIf="nom.errors?.required"> This field is required </div>
-          <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+          <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+          <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères </div>
 
         </div>
       </div>
@@ -82,7 +82,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
   </div>
 </ng-template>
 <!-- MODIFIER -->
@@ -102,7 +102,7 @@
         </div>
         
         <div *ngIf="role === 'ADMIN' " class="col-sm-6">
-           <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Application</span></a>
+           <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Profil</span></a>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@
 
           
             <th *ngIf="role === 'MODERATEUR' && societecnct===null"> <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-              Societe
+              Société
             </span>   </th>
           <th>
               <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
@@ -157,14 +157,14 @@
           
 
             <td *ngIf="role === 'MODERATEUR' && societecnct!==null">
-              <a (click)="modifier(contentt, profil)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-              <a (click)="deleteProfil(profil)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              <a (click)="modifier(contentt, profil)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE254;</i></a>
+              <a (click)="deleteProfil(profil)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE872;</i></a>
             </td>
           
 
             <td *ngIf="role === 'ADMIN' ">
-              <a (click)="modifier(contentt, profil)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-              <a (click)="deleteProfil(profil)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              <a (click)="modifier(contentt, profil)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE254;</i></a>
+              <a (click)="deleteProfil(profil)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE872;</i></a>
             </td>
       </tr>
 

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Type } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -454,14 +453,14 @@ if(this.array[k]){
 
             if(this.index==0){
             Swal.fire(
-              'Supprimé!',
-              'La societe a été supprimé.',
+              'Modifiéé!',
+              'L entité a été modifié.',
               'success'
             )}
             else{
               Swal.fire(
-              'Supprimé!',
-              'vous peut pas supprimer , supprimer les champs reliés à la société.',
+              'Modifié!',
+              'vous peut pas modifié , supprimer ou modifier les champs reliés à l entité.',
               'error'
             )
 
@@ -543,13 +542,13 @@ if(this.array[k]){
     if(this.index==0){
           Swal.fire(
             'Supprimé!',
-            'La societe a été supprimé.',
+            'L entité a été supprimé.',
             'success'
           )}
           else{
             Swal.fire(
             'Supprimé!',
-            'vous peut pas supprimer , supprimer les champs reliés à la Type Entite.',
+            'vous peut pas supprimer , supprimer les champs reliés à l entité.',
             'error'
           )
 

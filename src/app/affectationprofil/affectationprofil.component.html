@@ -5,7 +5,7 @@
     <!-- ******AJOUTER****** -->
     <ng-template #content let-modal>
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic">Nouveau Utilisateur</h4>
+          <h4 class="modal-title" id="modal-basic">Nouveau Affection des profils</h4>
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -20,14 +20,66 @@
               <input type="hidden" #tel (ngModel)="tel" name="societeDTO" id="tel" class="form-control"
                 placeholder="tel">
             </div>
-            <div class="form-group">
-              <label for="typee"> Entite :</label>
         
-              <select id="typee" nom="typee" 
-                  class="form-control" #typee (ngModel)="typee"    (change)="entiteChange(typee.value)">
-                <option selected  *ngFor="let typee of listeEntite"    [value]="typee.id">{{typee.nom}}</option>
-              </select>
-            </div>
+
+
+
+
+
+            <input type="radio" id="contactChoice1" #societeO (ngModel)="societeO" 
+          nom="contact" value="application" (change)="radio(societeO.value)">
+         <label for="contactChoice1">Application</label> <br><br>
+     
+         <input type="radio" id="contactChoice2" #societeTO (ngModel)="societeTO"
+          nom="contact" value="menu" (change)="radio(societeTO.value)">
+         <label for="contactChoice2" >Menu </label>
+    
+         <div *ngIf="rad === 'application' ">
+
+          <div class="form-group">
+            <label for="typee">Application :</label>
+      
+            <select id="typee" nom="typee" 
+                class="form-control" #typee (ngModel)="typee"    (change)="typeEntiteChange(typee.value)">
+              <option selected  *ngFor="let typee of typeEEntite"    [value]="typee.id">{{typee.nom}}</option>
+            </select>
+          </div>
+        </div>
+
+
+
+        <div *ngIf="rad === 'menu' ">
+
+          
+
+        <div class="form-group">
+          <label for="type">Menu :</label>
+    
+          <select id="type" nom="type" 
+              class="form-control" #type (ngModel)="type"    (change)="typeSocieteChange(type.value)">
+            <option selected  *ngFor="let type of societeChoisie"    [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+        
+        
+        </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
             <div class="form-group">
               <label for="typee"> Profil :</label>
@@ -38,75 +90,11 @@
               </select>
             </div>
     
-            <div class="form-group">
-              <label for="typee"> Role :</label>
-        
-              <select id="role" nom="typee" 
-                  class="form-control" #role (ngModel)="role"    (change)="getRole(role.value)">
-                  <option     value="ADMIN">Admin</option>
-                  <option     value="UTILISATEUR">Utilisateur</option>
-                </select>
-            </div>
             
             
       
-            <div class="form-group">
-              <label for="nom">Nom :</label>
-              <input type="text"
-              required
-              minlength=2
-              maxlength=30
-              name="nom"
-              (keypress)="keyPressAlphabitique($event)"
-              #nom = "ngModel"
-              ngModel
-              id="nom" autofocus="online" autocomplete="off" class="form-control" placeholder="nom">
-            </div>
-            <div>
-              <div *ngIf = "nom.touched">
-                <div *ngIf="nom.errors?.required"> This field is required </div>
-                <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
-      
-              </div>
-            </div>
-      
-            <div class="form-group">
-              <label for="prenom">Prenom :</label>
-              <input type="text"
-              required
-              minlength=2
-              maxlength=30
-              name="prenom"
-              (keypress)="keyPressAlphabitique($event)"
-              #prenom = "ngModel"
-              ngModel
-              id="prenom" autofocus="online" autocomplete="off" class="form-control" placeholder="prenom">
-            </div>
-            <div>
-              <div *ngIf = "prenom.touched">
-                <div *ngIf="prenom.errors?.required"> This field is required </div>
-                <div *ngIf="prenom.errors?.minlength"> This field must have at leat 2 charactres </div>
-      
-              </div>
-            </div>
+            
     
-            <div class="form-group">
-              <label for="login">Login :</label>
-              <input type="email"   #login (ngModel)="login" name="login" id="login" class="form-control"
-                placeholder="login">
-            </div>
-    
-            <div class="form-group">
-              <label for="password">Mode De Passe :</label>
-              <input type="password"   #password (ngModel)="password" name="password" id="password" class="form-control"
-                placeholder="password">
-            </div>
-            
-            <div class="form-group">
-              <label for="statut">Statut :</label>
-              <input type="text"   #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
-                placeholder="statut">
-            </div>
               
         
               
