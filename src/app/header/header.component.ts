@@ -48,7 +48,6 @@ export class HeaderComponent implements OnInit {
     this.societe.getSocietParNom(serachForm.value.search ,this.localUser.data.token)
     .subscribe(data => {this.socie = data;
      this.socie=this.socie.data;
-     console.log("serachForm",this.socie.data)
      localStorage.setItem('admicnct', JSON.stringify(this.socie))
       this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
       if(this.societecnct.id=null){

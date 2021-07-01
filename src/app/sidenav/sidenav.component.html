@@ -4,7 +4,7 @@
   </div>
   <mat-divider></mat-divider>
    <div ></div>
-   <div *ngIf="roleUser === 'MODERATEUR'">
+   <div *ngIf="roleUser === 'MODERATEUR' && menu!=='testt'">
 
   <h2 matSubheader class="mt-2"></h2>
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
@@ -17,7 +17,7 @@
 </div>
 
 
-<div *ngIf="roleUser === 'ADMIN' || roleUser === 'MODERATEUR'">
+<div *ngIf="(roleUser === 'ADMIN' || roleUser === 'MODERATEUR')  && menu!=='testt'">
 
 
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/typeentite">
@@ -44,9 +44,37 @@
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/affectationprofil">
     <mat-icon></mat-icon>  Affectation
   </a>
+  <a  mat-list-item routerLinkActive="list-item-active" (click)="testt()" routerLink="/pagemenu">
+    <mat-icon></mat-icon>  Partie Travaille
+  </a>
 </div>
 
+<div *ngIf="roleUser === 'UTILISATEUR'  && applicationn!=='tit' ">
+  <div *ngFor="let type of listAplication2" >
+  <a  mat-list-item routerLinkActive="list-item-active"  (click)="application(type)" >
+    <mat-icon></mat-icon>  {{type}}
+  </a>
+</div>
+</div>
+<div *ngIf="roleUser === 'UTILISATEUR'  && applicationn==='tit' ">
+  <a  mat-list-item routerLinkActive="list-item-active"  (click)="application(type)" >
+    <mat-icon></mat-icon>  Test
+  </a>
+</div>
 
+<div *ngIf="roleUser === 'ADMIN'   && menu==='testt'">
+  <a  mat-list-item routerLinkActive="list-item-active" (click)="retour()" routerLink="/pagemenu">
+    <mat-icon></mat-icon>  Partie ADMIN
+  </a>
+  
+</div>
+
+<div *ngIf="roleUser === 'MODERATEUR'   && menu==='testt'">
+  <a  mat-list-item routerLinkActive="list-item-active" (click)="retour()" routerLink="/pagemenu">
+    <mat-icon></mat-icon>  Partie MODERATEUR
+  </a>
+  
+</div>
 <div *ngIf="test === 'test'">
 
 

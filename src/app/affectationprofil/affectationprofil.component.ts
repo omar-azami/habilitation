@@ -49,7 +49,10 @@ export class AffectationprofilComponent implements OnInit {
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.totalLenght=this.listUtilisateur.length;
+    if(this.localUser.data.roles[0]=="UTILISATEUR"){
+      this.router.navigate(['/pagemenu'])
 
+    }
     this.updateSubscription = interval(100).subscribe(
       (val) => {       
         this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
@@ -70,6 +73,10 @@ export class AffectationprofilComponent implements OnInit {
          this.getProfil();
          this.getAllsocieteMenu();
          this.gettypeEEntite();
+         this.getAllProfilMenu()
+         this.getUtilisateur()
+         console.log("profilMenu",this.profilMenu)
+
   }
   entiteMereChoisie:any
   typeSocieteChange(type){
@@ -83,12 +90,75 @@ export class AffectationprofilComponent implements OnInit {
      })
 
 }
+
+
+
+
+profilMenu:any
+
+getAllProfilMenu(){
+
+
+  if(this.localUser.data.roles[0]==="ADMIN")
+  {
+    // this.idSociete=this.localUser.data.idSociete;
+    // this.utilisateutService.getAllUtilisateur(this.idSociete, this.localUser.data.token)
+    //  .subscribe(data => {this.profilMenu=data;
+    //   this.profilMenu=this.profilMenu.collection
+    // })
+   
+  }
+  if(this.localUser.data.roles[0]==="MODERATEUR")
+  {
+  
+  this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
+
+
+     if(this.societecnct==null)
+      {
+        this.utilisateutService.getAllUtilisateur( this.localUser.data.token)
+     .subscribe(data => {this.profilMenu=data;
+      this.profilMenu=this.profilMenu
+      console.log("profilMenu",this.profilMenu)
+
+   })
+      }
+      if(this.societecnct!=null)
+      {
+      
+
+  //       this.idSociete=this.societecnct.id;
+  //   this.utilisateutService.getAllUtilisateur(this.idSociete, this.localUser.data.token)
+  //    .subscribe(data => {this.profilMenu=data;
+  //     this.profilMenu=this.profilMenu.collection
+
+  //  })
+      }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 societeChoisie:any
 getAllsocieteMenu(){
   if(this.localUser.data.roles[0]==="ADMIN")
   {
     this.idSociete=this.localUser.data.idSociete;
-    this.entiteService.getSociete(this.idSociete, this.localUser.data.token)
+    this.menuService.getSociete(this.idSociete, this.localUser.data.token)
      .subscribe(data => {this.societeChoisie=data;
       this.societeChoisie=this.societeChoisie.collection
     })
@@ -102,10 +172,9 @@ getAllsocieteMenu(){
 
      if(this.societecnct==null)
       {
-        this.entiteService.getTypeEntiteSocieteAll( this.localUser.data.token)
+        this.menuService.getTypeEntiteSocieteAll( this.localUser.data.token)
      .subscribe(data => {this.societeChoisie=data;
       this.societeChoisie=this.societeChoisie.collection
-      console.log("menu",this.societeChoisie)
 
    })
       }
@@ -114,7 +183,7 @@ getAllsocieteMenu(){
       
 
         this.idSociete=this.societecnct.id;
-    this.entiteService.getSociete(this.idSociete, this.localUser.data.token)
+    this.menuService.getSociete(this.idSociete, this.localUser.data.token)
      .subscribe(data => {this.societeChoisie=data;
       this.societeChoisie=this.societeChoisie.collection
 
@@ -200,6 +269,36 @@ gettypeEEntite(){
       return false;
     }
   }
+   getUtilisateur(){
+                       if(this.localUser.data.roles[0]==="ADMIN")
+                      {
+                          this.idSociete=this.localUser.data.idSociete;
+                          this.utilisateutService.getUtilisateurParSociete(this.idSociete,this.localUser.data.token)
+                          .subscribe(data => {this.listUtilisateur = data;
+                           this.listUtilisateur=this.listUtilisateur.collection;
+                           console.log("data liste utilisateur ",this.listUtilisateur)})                         
+                          }
+                        if(this.localUser.data.roles[0]==="MODERATEUR")
+                        {
+                        
+                        this.societecnct = JSON.parse(localStorage.getItem('admicnct'));              
+                         if(this.societecnct==null)
+                            {
+                              this.utilisateutService.getAllUtilisateur(this.localUser.data.token)
+                              .subscribe(data => {this.listUtilisateur = data;
+                               this.listUtilisateur=this.listUtilisateur.collection;
+                               console.log("data liste utilisateur ",this.listUtilisateur)})
+                            }
+                            if(this.societecnct!=null)
+                              {
+                               this.idSociete=this.societecnct.id
+                               this.utilisateutService.getUtilisateurParSociete(this.idSociete,this.localUser.data.token)
+                               .subscribe(data => {this.listUtilisateur = data;
+                               this.listUtilisateur=this.listUtilisateur.collection;
+                               console.log("data liste utilisateur ",this.listUtilisateur)})
+                              }
+                          }
+  }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -279,7 +378,7 @@ gettypeEEntite(){
     if(this.localUser.data.roles[0]==="ADMIN")
     {
       this.idSociete=this.localUser.data.idSociete;
-      this.entiteService.getSociete(this.idSociete, this.localUser.data.token)
+      this.menuService.getSociete(this.idSociete, this.localUser.data.token)
        .subscribe(data => {this.listeEntite=data;
         this.listeEntite=this.listeEntite.collection
 
@@ -298,7 +397,7 @@ gettypeEEntite(){
         
 
           this.idSociete=this.societecnct.id;
-      this.entiteService.getSociete(this.idSociete, this.localUser.data.token)
+      this.menuService.getSociete(this.idSociete, this.localUser.data.token)
        .subscribe(data => {this.listeEntite=data;
         this.listeEntite=this.listeEntite.collection
 
@@ -308,11 +407,6 @@ gettypeEEntite(){
   }
 
 
-  rad:any
-  radio(value){
-    console.log("value",value)
-    this.rad=value
-  }
 
 
   typeEntiteAJoute:any;
@@ -327,28 +421,64 @@ gettypeEEntite(){
               })
     
   }
-
-
+  getToday(): string {
+    return new Date().toISOString().split('T')[0]
+ }  
+dif:any
   societeAct:any;
   register(registerForm){
     this.localUser = JSON.parse(localStorage.getItem('userData'));
 
     this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
-    this.role=this.localUser.data.roles[0]
-    registerForm.value.entiteDTO=this.entite
     registerForm.value.profilDTO=this.profil
-    registerForm.value.roleDTOList=this.rolesh
+    registerForm.value.menuDTO=this.entiteMereChoisie
     
     console.log("societechoiParAdmin :",registerForm.value)
 
-    if(this.role==="ADMIN")
-    {      this.societeAct=this.localUser.data.societee 
-      registerForm.value.societeDTO=this.societeAct
+    // if(this.role==="ADMIN")
+    // {      this.societeAct=this.localUser.data.societee 
+    //   registerForm.value.societeDTO=this.societeAct
+    // }
+    // if(this.role==="MODERATEUR")
+    // {    this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
+    // registerForm.value.societeDTO=this.societecnct
+    // }
+    // this.dif=   Math.floor((Date.UTC(registerForm.value.dateDebut.getFullYear(), registerForm.value.dateDebut.getMonth(), registerForm.value.dateDebut.getDate()) - Date.UTC(registerForm.value.dateFin.getFullYear(), registerForm.value.dateFin.getMonth(), registerForm.value.dateFin.getDate()) ) /(1000 * 60 * 60 * 24));
+  
+    // const utc1 = Date.UTC(registerForm.value.dateDebut.getFullYear(), registerForm.value.dateDebut.getMonth(), registerForm.value.dateDebut.getDate());
+
+    var date1 = new Date(registerForm.value.dateDebut)
+    var date2 = new Date(registerForm.value.dateFin);
+var Time = date2. getTime() - date1. getTime();
+var Days = Time / (1000 * 3600 * 24); //Diference in Days.
+    console.log("date",Days)
+    if(      registerForm.value.dateFin!= null &&Days<0     ){
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Vous avez choisé date debut superieeur a date fin',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return 0
     }
-    if(this.role==="MODERATEUR")
-    {    this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
-    registerForm.value.societeDTO=this.societecnct
-    }
+
+
+    if(
+      
+      registerForm.value.profilDTO== undefined ||
+      registerForm.value.dateDebut== null ||
+         registerForm.value.menuDTO== undefined) {
+        
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Vous avez oublié un champs',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return 0
+      }
       console.log("registerFormmm: ",registerForm.value)
       this.utilisateutService.registerUtilisateur(registerForm.value, this.localUser.data.token).subscribe(data => {
         

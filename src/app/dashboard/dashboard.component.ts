@@ -41,6 +41,10 @@ export class DashboardComponent implements OnInit {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.getTypeSociet();
     this.totalLenght=this.listTypeSociete.length
+    if(this.localUser.data.roles[0]=="UTILISATEUR"){
+      this.router.navigate(['/pagemenu'])
+
+    }
     if(this.localUser.data.roles[0]==="ADMIN"){
       this.router.navigate(['/typeentite'])
 
@@ -98,7 +102,7 @@ export class DashboardComponent implements OnInit {
   }
 
   register(registerForm: NgForm){
-    registerForm.value.statut="active"
+    registerForm.value.statut="ACTIVE"
     this.typesociete.registerTypeSocite(registerForm.value, this.localUser.data.token).subscribe(data => {
       
       Swal.fire({

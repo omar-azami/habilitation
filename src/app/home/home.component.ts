@@ -70,6 +70,10 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/login'])
 
         }
+        if(this.localUser.data.roles[0]=="UTILISATEUR"){
+          this.router.navigate(['/pagemenu'])
+
+        }
      
 
 
@@ -143,7 +147,7 @@ this.type=societe.typeSocieteDTO.id;
     this.localitte=registerForm.value.statut
 
     registerForm.value.typeSocieteDTO=this.typeSociete
-    registerForm.value.statut="active"
+    registerForm.value.statut="ACTIVE"
     console.log("uploadImageData",registerForm.value);
     console.log("    listLocalite ",this.listLocalite);
     // this.societe.registerSocitei(uploadImageData, this.localUser.data.token).subscribe()

@@ -45,7 +45,10 @@ export class UtilisateurComponent implements OnInit {
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.totalLenght=this.listUtilisateur.length;
+    if(this.localUser.data.roles[0]=="UTILISATEUR"){
+      this.router.navigate(['/pagemenu'])
 
+    }
     this.updateSubscription = interval(100).subscribe(
       (val) => {       
         this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
@@ -248,6 +251,7 @@ export class UtilisateurComponent implements OnInit {
     registerForm.value.entiteDTO=this.entite
     registerForm.value.profilDTO=this.profil
     registerForm.value.roleDTOList=this.rolesh
+    registerForm.value.statut="ACTIVE"
     
     console.log("societechoiParAdmin :",registerForm.value)
 

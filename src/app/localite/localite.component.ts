@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -30,6 +31,7 @@ export class LocaliteComponent implements OnInit {
     private modalService: NgbModal,
     private typesociete: TypesocieteService,
     private localiteService: LocaliteService, 
+    private router: Router
     
 
     ) { }
@@ -37,6 +39,10 @@ export class LocaliteComponent implements OnInit {
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.getLocalite();
+    if(this.localUser.data.roles[0]=="UTILISATEUR"){
+      this.router.navigate(['/pagemenu'])
+
+    }
     this.totalLenght=this.listLocalite.length
     
     

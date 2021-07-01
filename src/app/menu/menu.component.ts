@@ -65,6 +65,10 @@ str1:string;
   ngOnInit(): void {
     this.localUser = JSON.parse(localStorage.getItem('userData'));
     this.totalLenght=this.listTypeentite.length;
+    if(this.localUser.data.roles[0]=="UTILISATEUR"){
+      this.router.navigate(['/pagemenu'])
+
+    }
     this.updateSubscription = interval(100).subscribe(
       (val) => {       
         this.societecnct = JSON.parse(localStorage.getItem('admicnct'));
@@ -90,7 +94,7 @@ str1:string;
   }
 
 
-  
+ 
 
   
   typeEEntite:any;

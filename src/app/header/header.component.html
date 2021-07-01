@@ -35,8 +35,13 @@
             </div>
             <div *ngIf="role === 'ADMIN' ">
               {{role}}<br>
-              {{localUser.data.entite }}<br>
               {{localUser.data.societe}}<br>
+              {{localUser.data.entite }}<br>
+            </div>
+            <div *ngIf="role === 'UTILISATEUR' ">
+              {{localUser.data.societe}}<br>
+              {{localUser.data.entite }}<br>
+              {{localUser.data.profil.nom}}<br>
             </div>
 
 

@@ -28,6 +28,8 @@ import { MenuComponent } from './menu/menu.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PartailsComponent } from './partails/partails.component';
 import { AffectationprofilComponent } from './affectationprofil/affectationprofil.component';
+import { PageMenuComponent } from './page-menu/page-menu.component';
+import { PagemenuComponent } from './pagemenu/pagemenu.component';
 
 
 
@@ -48,6 +50,8 @@ import { AffectationprofilComponent } from './affectationprofil/affectationprofi
     PartailsComponent,
     MenuComponent,
     AffectationprofilComponent,
+    PageMenuComponent,
+    PagemenuComponent,
 
     
   ],

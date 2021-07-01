@@ -12,21 +12,21 @@ export class AffectationprofilService {
   public getUtilisateurParSociete(idSociete:number, token : String) {
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.get(this.API + '/user/show/utilisateur/societe/id/'+idSociete , httpOptions);
+    return this.http.get(this.API + '/utilisateur/show/profilMenu/BySociete/'+idSociete , httpOptions);
     
   }
-  public getAllUtilisateur( token : String) {
+  public getAllUtilisateur( token : String) {//88
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.get(this.API + '/user/show/utilisateur' , httpOptions);
+    return this.http.get(this.API + '/admin/show/profilMenu/al' , httpOptions);
     
   }
 
  
-  public registerUtilisateur(utilisateur: any, token : String) {
+  public registerUtilisateur(utilisateur: any, token : String) {//88
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     const httpOptions = { headers: headers_object  }   
-    return this.http.post(this.API + '/user/add/utilisateur', utilisateur, httpOptions);
+    return this.http.post(this.API + '/admin/add/profilmenu', utilisateur, httpOptions);
   }
 
   public updateUtilisateurParAdmin(idtypeEntite:number , idSociete:number, entite: any, token : String) {

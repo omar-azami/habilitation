@@ -190,8 +190,8 @@
           <td>{{typeSociete.nom}}</td>
           <td>{{typeSociete.code}}</td>
           <td>{{typeSociete.nomAbrege}}</td>
-          <td *ngIf="typeSociete.statut === 'active' "><span class="dot"></span></td>
-          <td *ngIf="typeSociete.statut === 'deactive' "><span class="red"></span></td>
+          <td *ngIf="typeSociete.statut === 'ACTIVE' "><span class="dot"></span></td>
+          <td *ngIf="typeSociete.statut === 'DESACTIVE' "><span class="red"></span></td>
 
           <td>{{typeSociete.createdBy}}</td>
           <td>{{typeSociete.createdDate  | date:'mediumDate'}}</td>

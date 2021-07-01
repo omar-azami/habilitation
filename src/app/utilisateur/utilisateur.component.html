@@ -103,8 +103,7 @@
         </div>
         
         <div class="form-group">
-          <label for="statut">Statut :</label>
-          <input type="text"   #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
+          <input type="hidden"   #statut (ngModel)="statut" name="statut" id="statut" class="form-control"
             placeholder="statut">
         </div>
           
@@ -340,8 +339,8 @@
                 <td>{{utilisateur.profilDTO.nom}}</td>  
 
                 <td>{{utilisateur.login}}</td>
-                <td>{{utilisateur.statut}}</td>
-                <td>{{utilisateur.createdBy}}</td>
+                <td *ngIf="utilisateur.statut === 'ACTIVE' "><span class="dot"></span></td>
+                <td *ngIf="utilisateur.statut === 'DESACTIVE' "><span class="red"></span></td>                <td>{{utilisateur.createdBy}}</td>
                 <td>{{utilisateur.createdDate | date:'mediumDate'}}</td>
                 <td>{{utilisateur.lastModifedDate}}</td>
                 <td>{{utilisateur.lastModifiedBy | date:'mediumDate'}}</td>

@@ -12,43 +12,15 @@
         </div>
         <div class="modal-body">
           <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <input type="hidden" #societeDTO (ngModel)="societeDTO" name="societeDTO" id="societeDTO" class="form-control"
                 placeholder="societeDTO">
-            </div>
-            <div class="form-group">
-              <input type="hidden" #tel (ngModel)="tel" name="societeDTO" id="tel" class="form-control"
-                placeholder="tel">
-            </div>
+            </div> -->
+            
         
+         
 
 
-
-
-
-            <input type="radio" id="contactChoice1" #societeO (ngModel)="societeO" 
-          nom="contact" value="application" (change)="radio(societeO.value)">
-         <label for="contactChoice1">Application</label> <br><br>
-     
-         <input type="radio" id="contactChoice2" #societeTO (ngModel)="societeTO"
-          nom="contact" value="menu" (change)="radio(societeTO.value)">
-         <label for="contactChoice2" >Menu </label>
-    
-         <div *ngIf="rad === 'application' ">
-
-          <div class="form-group">
-            <label for="typee">Application :</label>
-      
-            <select id="typee" nom="typee" 
-                class="form-control" #typee (ngModel)="typee"    (change)="typeEntiteChange(typee.value)">
-              <option selected  *ngFor="let typee of typeEEntite"    [value]="typee.id">{{typee.nom}}</option>
-            </select>
-          </div>
-        </div>
-
-
-
-        <div *ngIf="rad === 'menu' ">
 
           
 
@@ -60,26 +32,7 @@
             <option selected  *ngFor="let type of societeChoisie"    [value]="type.id">{{type.nom}}</option>
           </select>
         </div>
-        
-        
-        </div>
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
     
             <div class="form-group">
               <label for="typee"> Profil :</label>
@@ -91,24 +44,30 @@
             </div>
     
             
+
+            <div class="form-group">
+              <label for="dateDebut">Date Debut :</label>
+              <input type="date"   #dateDebut (ngModel)="dateDebut" name="dateDebut" id="dateDebut" [min]="getToday()"class="form-control"
+                placeholder="Date Debut">
+            </div>
+
+
+            <div class="form-group">
+              <label for="dateFin">Date Fin :</label>
+              <input type="date"   #dateFin (ngModel)="dateFin" name="dateFin" id="dateFin" [min]="getToday()" class="form-control"
+                placeholder="date Fin">
+            </div>
             
-      
-            
-    
-              
-        
-              
-        
-              
+          
     
     
             <div class="form-group mt-3">
-              <input type="submit" value="Register" class="btn btn-primary w-100" (click)="modal.close('Save click')">
+              <input type="submit" value="Ajouter" class="btn btn-primary w-100" (click)="modal.close('Save click')">
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
         </div>
       </ng-template>
         <!-- ******AJOUTER****** -->
@@ -117,7 +76,7 @@
         <!-- ******MODIFIER****** -->
         <ng-template #contentt let-modal>
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic">Modifier Utilisateur</h4>
+            <h4 class="modal-title" id="modal-basic">Modifier Affectation Des Profils</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -133,7 +92,7 @@
                   placeholder="tel">
               </div>
               <div class="form-group">
-                <label for="typee"> Entite :</label>
+                <label for="typee"> Entité :</label>
           
                 <select id="typee" nom="typee" 
                     class="form-control" #typee (ngModel)="typee"    (change)="entiteChange(typee.value)">
@@ -175,8 +134,9 @@
               </div>
               <div>
                 <div *ngIf = "nom.touched">
-                  <div *ngIf="nom.errors?.required"> This field is required </div>
-                  <div *ngIf="nom.errors?.minlength"> This field must have at leat 2 charactres </div>
+                  <div *ngIf="nom.errors?.required"> Ce champ est requis </div>
+                  <div *ngIf="nom.errors?.minlength"> Ce champ doit avoir au moins 2 caractères
+                  </div>
         
                 </div>
               </div>
@@ -226,7 +186,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
           </div>
         </ng-template>
         <!-- ******MODIFIER****** -->
@@ -242,14 +202,14 @@
         <div class="table-title">
           <div class="row">
             <div class="col-sm-6">
-              <h2> <b>Utilisateur</b></h2>
+              <h2> <b>Affectation</b></h2>
             </div>
             <div *ngIf="role === 'MODERATEUR' && societecnct!==null" class="col-sm-6">
-              <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Utilisateur</span></a>
+              <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouvelle Affectation</span></a>
             </div>
             
             <div *ngIf="role === 'ADMIN' " class="col-sm-6">
-                <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouveau Utilisateur</span></a>
+                <a (click)="open(content)" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nouvelle Affectation</span></a>
               </div>
           </div>
         </div>
@@ -270,44 +230,23 @@
     
                 <th>
                     <span value="type" style="cursor: pointer;" (click) = "trier($event)">
-                       Entite
-                    </span>  
-                    <!-- <mat-icon class="user-image-icon ml-1">
-                      keyboard_arrow_down</mat-icon> -->
-                </th>
+                       Menu
+                    </span>   </th>
                 <th>
                   <span value="type" style="cursor: pointer;" (click) = "trier($event)">
-                    Nom
+                    Profil
                   </span> </th>
               <th>
                   <span value="nom" style="cursor: pointer;" (click) = "trier($event)">
-                    Profil
+                    Date Debut
                   </span>  </th>
               <th>
                 
                 <span value="code" style="cursor: pointer;" (click) = "trier($event)">
-                  Login
+                  Date Fin
                 </span> </th>
-              <th>
-                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                  Statut
-                </span>   </th>
-              <th>
-                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                  Cree Par
-                </span>  </th>
-                <th>
-                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                  Cree Le
-                </span> </th> 
-              <th>
-                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                  Modifie Par
-                </span>  </th>
-                <th>
-                <span value="statut" style="cursor: pointer;" (click) = "trier($event)">
-                  Modifie Le
-                </span></th>
+               
+       
                 <th *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">Actions</th> 
     
     
@@ -320,22 +259,19 @@
     
           <tbody>
          
-                <tr *ngFor="let utilisateur of listUtilisateur | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLenght }">
+                <tr *ngFor="let utilisateur of listUtilisateur | paginate: { itemsPerPage: 10, currentPage: page, totalItems:totalLenght }">
                   
-                    <td *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">{{utilisateur.societeDTO.nom}}</td>
+                    <td *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct===null">{{utilisateur.profil.societe.nom}}</td>
     
                   
-                  <td>{{utilisateur.entiteDTO.nom}}</td>
+                 
     
-                    <td>{{utilisateur.nom}}</td>
-                    <td>{{utilisateur.profilDTO.nom}}</td>  
+                    <td>{{utilisateur.menu.nom}}</td>
+                    <td>{{utilisateur.profil.nom}}</td>  
     
-                    <td>{{utilisateur.login}}</td>
-                    <td>{{utilisateur.statut}}</td>
-                    <td>{{utilisateur.createdBy}}</td>
-                    <td>{{utilisateur.createdDate | date:'mediumDate'}}</td>
-                    <td>{{utilisateur.lastModifedDate}}</td>
-                    <td>{{utilisateur.lastModifiedBy | date:'mediumDate'}}</td>
+                    <td>{{utilisateur.dateDebut | date:'mediumDate'}}</td>
+                    <td>{{utilisateur.dateFin | date:'mediumDate'}}</td>
+                    
     
     
                       <td *ngIf="localUser.data.roles[0] === 'MODERATEUR' && societecnct!==null">

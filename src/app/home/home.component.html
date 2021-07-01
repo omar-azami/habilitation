@@ -237,8 +237,8 @@
         <td>{{societe.nom}}</td>
         <td>{{societe.code}}</td>
         <td>{{societe.nomAbrege}}</td>
-        <td *ngIf="societe.statut === 'active' "><span class="dot"></span></td>
-        <td *ngIf="societe.statut === 'deactive' "><span class="red"></span></td>
+        <td *ngIf="societe.statut === 'ACTIVE' "><span class="dot"></span></td>
+        <td *ngIf="societe.statut === 'DESACTIVE' "><span class="red"></span></td>
         <td>{{societe.createdBy}}</td>
         <td>{{societe.createdDate  | date:'mediumDate'}}</td>
         <td>{{societe.lastModifiedBy}}</td>
